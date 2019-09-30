@@ -1,6 +1,9 @@
 class GamesController < ApplicationController
   def show
-    @game = game.find(params[:id])
+    @game = Game.find(params[:id])
+    if @game.blank?
+      render_not_found
+    end
   end
 
   def new
