@@ -82,6 +82,6 @@ gem 'omniauth-facebook'
 
 gem 'omniauth-twitter'
 
-gem 'omniauth-gplus', '~> 2.0'
-
 gem 'activerecord-session_store'
+
+gem 'omniauth-google-oauth2'

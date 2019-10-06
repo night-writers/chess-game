@@ -156,8 +156,10 @@ GEM
       rack (>= 1.6.2, < 3)
     omniauth-facebook (5.0.0)
       omniauth-oauth2 (~> 1.2)
-    omniauth-gplus (2.0.1)
-      omniauth-oauth2 (~> 1.1)
+    omniauth-google-oauth2 (0.8.0)
+      jwt (>= 2.0)
+      omniauth (>= 1.1.1)
+      omniauth-oauth2 (>= 1.6)
     omniauth-oauth (1.1.0)
       oauth
       omniauth (~> 1.0)
@@ -309,7 +311,7 @@ DEPENDENCIES
   jquery-rails
   listen (>= 3.0.5, < 3.2)
   omniauth-facebook
-  omniauth-gplus (~> 2.0)
+  omniauth-google-oauth2
   omniauth-twitter
   pg (>= 0.18, < 2.0)
   popper_js (~> 1.11.1)
