@@ -75,3 +75,11 @@ end
 gem 'devise'
 
 gem 'simple_form'
+
+gem "figaro"
+
+gem 'omniauth-facebook'
+
+gem 'omniauth-twitter'
+
+gem 'omniauth-gplus', '~> 2.0'
