@@ -75,3 +75,13 @@ end
 gem 'devise'
 
 gem 'simple_form'
+
+gem "figaro"
+
+gem 'omniauth-facebook'
+
+gem 'omniauth-twitter'
+
+gem 'activerecord-session_store'
+
+gem 'omniauth-google-oauth2'
