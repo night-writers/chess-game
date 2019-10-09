@@ -1,1 +1,11 @@
-<h1>Hello</h1>
+<% @games.each do |game| %>
+ <%- if white_player_id == nil || black_player_id == nil %> 
+
+    <div class="booyah-box col-10 offset-1">
+      <h1><%= game.name %></h1><br />
+      <p>**Player One Name**</p>
+      <button>Join Player 2</button>
+    </div>
+
+  <% end %>
+<% end %>
