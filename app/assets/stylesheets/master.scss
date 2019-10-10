@@ -1,5 +1,9 @@
 @import "bootstrap";
 
+.title {
+  margin-top: 20px;
+}
+
 .chessboard {
   border: 10px solid gray;
   text-align: center;
@@ -10,6 +14,7 @@
   max-width: 859px;
   min-width: 400px;
   min-height: 400px;
+  margin-top: 20px;
 }
 .black {
   background-color: #b58863;
