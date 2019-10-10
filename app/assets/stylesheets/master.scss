@@ -3,9 +3,11 @@
 .chessboard {
   border: 10px solid gray;
   text-align: center;
-  width: 60vw;
-  height: 60vw;    
+  width: 50vw;
+  height: 50vw;    
   margin: auto;
+  max-height: 859px;
+  max-width: 859px;
 }
 .black {
   background-color: #b58863;
