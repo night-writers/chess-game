@@ -1,1 +1,29 @@
 @import "bootstrap";
+
+.chessboard {
+  border: 10px solid gray;
+  text-align: center;
+  width: 60vw;
+  height: 60vw;    
+  margin: auto;
+}
+.black {
+  background-color: #b58863;
+  height: 12.5%;
+  width: 12.5%;
+  max-height: 100vw;
+  max-width: 100vw;
+  float: left;
+  padding: 0;
+  margin: auto;
+}
+.white {
+  background-color: #f0d9b5;
+  height: 12.5%;
+  width: 12.5%;
+  max-height: 100vw;
+  max-width: 100vw;
+  float: left;
+  padding: 0;
+  margin: auto;
+}
