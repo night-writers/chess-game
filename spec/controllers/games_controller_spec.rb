@@ -29,4 +29,12 @@ RSpec.describe GamesController, type: :controller do
       expect(response).to have_http_status(:success)
     end
   end
+
+  describe "games#update" do 
+    it "should successfully update the game black player id" do
+      game = FactoryBot.create(:game)
+      get :show, params: { id: game.id }
+      expect(response).to have_http_status(:success)
+    end
+  end
 end

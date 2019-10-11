@@ -11,16 +11,14 @@ class GamesController < ApplicationController
   end
 
   def create
-    @game = Game.create(game_params)
+    @game = current_user.games.create(game_params)
     redirect_to root_path
   end
 
   def update
+    @game = Game.find(params[:id])
     if @game.black_player_id != current_user
-       @game.black_player_id = current_user
-
-    @game = Game.update(game_params)
-    redirect_to root_path
+      @game.update_attribute(:black_player_id, current_user.id)
     end
   end
 
