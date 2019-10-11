@@ -7,20 +7,49 @@
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    
   </head>
 
   <body>
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+      <div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2">
+          <ul class="navbar-nav mr-auto">
+              <li class="nav-item active">
+                <%= link_to "New Game", new_game_path, class: "nav-link" %>
+              </li>
+              <li class="nav-item">
+                  <a class="nav-link" href="#">Concede</a>
+              </li>
+          </ul>
+      </div>
+      <div class="mx-auto order-0">
+          <%= link_to "Night-writers Chess Game", root_path, class: "navbar-brand mx-auto" %>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".dual-collapse2">
+              <span class="navbar-toggler-icon"></span>
+          </button>
+      </div>
+      <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
+          <ul class="navbar-nav ml-auto">
+            <% if current_user %>
+              <li class="nav-item">
+                <%= link_to "Sign out", destroy_user_session_path, method: :delete, class: "nav-link" %>
+              </li>
+            <% else %>
+              <li class="nav-item">
+                <%= link_to "Sign in", new_user_session_path, class: "nav-link" %>
+              </li>
+            <% end %>
+          </ul>
+      </div>
+    </nav>
     
-    <% if current_user %>
-      <%= link_to "Sign out", destroy_user_session_path, method: :delete %>
-    <% else %>
-      <%= link_to "Sign in with Facebook", user_facebook_omniauth_authorize_path %>
-      <%= link_to "Sign in with Twitter", user_twitter_omniauth_authorize_path %>
-      <%= link_to "Sign in with Google", user_google_oauth2_omniauth_authorize_path %>
+    
+    <% if notice.present? %>
+      <p class="notice alert alert-success"><%= notice %></p>
     <% end %>
-  
-    <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
+    <% if alert.present? %>
+      <p class="alert alert-warning"><%= alert %></p>
+    <% end %>
   
     <%= yield %>
   </body>

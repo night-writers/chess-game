@@ -1,1 +1,12 @@
-<h1>Hello</h1>
+<div class="title text-center col-10 offset-1">
+  <h1>Available Chess Games</h1>
+</div>
+<ul>
+  <% Game.available.each do |game| %>
+    <li>
+      <%= game.name %>
+      <%= link_to 'Join', game_path(game.id) %>
+    </li>
+  <% end %>
+</ul>
+
