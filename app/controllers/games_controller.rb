@@ -15,6 +15,18 @@ class GamesController < ApplicationController
     redirect_to root_path
   end
 
+  def update
+    if @game.black_player_id != current_user
+       @game.black_player_id = current_user
+
+    @game = Game.update(game_params)
+    redirect_to root_path
+    end
+  end
+
+  def join
+  end
+
   private
 
   def game_params
