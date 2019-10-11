@@ -5,80 +5,66 @@ module Piece
   end
   
   def self.is_obstructed_horizontal?(xd, xl, yl)
-    if (xl > xd) && (xl - 1) != xd
-      b = xl
-        while (b > xd) && (b - 1) != xd 
-          b = b - 1
-          if self.is_occupied(b, yl)
+      x_value = xl
+        while (x_value > xd) && (x_value - 1) != xd 
+          x_value = x_value - 1
+          if self.is_occupied(x_value, yl)
             return true
           end
         end
-    end
-    if (xl < xd) && (xl + 1) != xd
-      c = xl
-      while (c < xd) && (c + 1) != xd
-        c = c + 1
-        if self.is_occupied(c, yl) 
-          return true
-        end
-      end
-    end
-      return false
-  end
+       while (x_value < xd) && (x_value + 1) != xd
+         x_value = x_value + 1
+         if self.is_occupied(x_value, yl) 
+           return true
+         end
+       end
+         return false
+   end
   
   def self.is_obstructed_vertical?(yd, yl, xl)
-    if (yl > yd) && (yl - 1) != yd
-      f = yl
-        while (f > yd) && (f - 1) != yd
-          f = f - 1
-          if self.is_occupied(xl, f) 
+      y_value = yl
+        while (y_value > yd) && (y_value - 1) != yd
+          y_value = y_value - 1
+          if self.is_occupied(xl, y_value) 
             return true
           end
         end
-    end
-    if (yl < yd) && (yl + 1) != yd
-      h = yl
-      while (h < yd) && (h + 1) != yd
-        h = h + 1
-        if self.is_occupied(xl, h) 
+      while (y_value < yd) && (y_value + 1) != yd
+        y_value = y_value + 1
+        if self.is_occupied(xl, y_value) 
           return true
         end
       end
-    end
       return false
   end
   
   def self.is_obstructed_diagonal?(xd, yd, xl, yl)
-    if (yl > yd) && (yl - 1) != yd
-      j = yl
-        while (j > yd) && (j - 1) != yd
-          j = j - 1
-          k = xl
+      y_value = yl
+        while (y_value > yd) && (y_value - 1) != yd
+          y_value = y_value - 1
+          x_value = xl
           if xl > xd
-            k = k - 1
+            x_value = x_value - 1
           elsif xl < xd
-            k = k + 1
+            x_value = x_value + 1
           end
-          if self.is_occupied(k, j) 
+          if self.is_occupied(x_value, y_value) 
             return true
           end
         end
-    end
-    if (yl < yd) && (yl + 1) != yd
-      j = yl
-        while (j < yd) && (j + 1) != yd
-          j = j + 1
-          k = xl
+      y_value = yl
+        while (y_value < yd) && (y_value + 1) != yd
+          y_value = y_value + 1
+          x_value = xl
           if xl > xd
-            k = k - 1
+            x_value = x_value - 1
           elsif xl < xd
-            k = k + 1
+            x_value = x_value + 1
           end
-          if self.is_occupied(k, j) 
+          if self.is_occupied(x_value, y_value) 
             return true
           end
         end
-    end
       return false
   end
   
@@ -97,13 +83,7 @@ module Piece
   
   # Temporary method until functionality for adding pieces to a game is added.
   def self.is_occupied(x, y)
-    a = 2
-    b = 2
-    if a == 2 && b == 2
       return true
-    else
-      return false
-    end
     #game.pieces.where(location_x: x, location_y: y).present?
   end
 
