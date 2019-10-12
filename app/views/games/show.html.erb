@@ -73,4 +73,7 @@
   <div id="h1" class="white"></div>
 </div>
 
-<button>Join Game</button>
+<%= @game.black_player_id %>
+<%= @game.white_player_id %>
+
+<%= link_to "Join Game", game_path(@game), :method => :put, class: "nav-link" %>

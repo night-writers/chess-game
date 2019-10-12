@@ -5,7 +5,7 @@
   <% Game.available.each do |game| %>
     <li>
       <%= game.name %>
-      <%= link_to 'Join', game_path(game.id) %>
+      <%= link_to 'Start Game', game_path(game.id) %>
     </li>
   <% end %>
 </ul>
