@@ -10,6 +10,9 @@ RSpec.describe GamesController, type: :controller do
 
   describe "games#create" do
     it "should successfully add a new game to the database" do
+      user = FactoryBot.create(:user)
+      sign_in user
+    
       post :create, params: {
         game: {
           name: 'Game Name'
@@ -29,6 +32,9 @@ RSpec.describe GamesController, type: :controller do
 
   describe "games#update" do 
     it "should successfully update the game black player id" do
+      user = FactoryBot.create(:user)
+      sign_in user
+      
       post :create, params: {
         game: {
           name: 'Game Name'

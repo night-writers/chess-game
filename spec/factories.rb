@@ -9,5 +9,6 @@ FactoryBot.define do
 
   factory :game do
     name { "game name" }
+    association :user
   end
 end
