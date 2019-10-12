@@ -2,7 +2,7 @@ class Game < ApplicationRecord
   has_many :pieces
   has_many :comments
   after_initialize :init
-  belongs_to :user
+  belongs_to :user, optional: true
   scope :available, -> { where(status: "available") }
   
   def init
