@@ -33,16 +33,12 @@ RSpec.describe GamesController, type: :controller do
   describe "games#update" do 
     it "should successfully update the game black player id" do
       user = FactoryBot.create(:user)
+      game = FactoryBot.create(:game)
       sign_in user
-      
-      post :create, params: {
-        game: {
-          name: 'Game Name'
-        }
-      }
-      patch :update, params: { name: 'Game Name', game: { black_player_id: '1' } }
-      expect(game.black_player_id).to eq('1')
-      expect(response).redirect_back(fallback_location: root_path)
+
+      patch :update, params: { id: game.id, game: { black_player_id: user.id } }
+      game.reload
+      expect(game.black_player_id).to eq(user.id)
     end
   end
 end
