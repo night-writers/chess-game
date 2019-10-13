@@ -9,5 +9,146 @@ class Game < ApplicationRecord
     self.status ||= "available"
     self.white_player_id ||= self.user_id
   end
+
+  def populate_game
+  # white pieces
+
+    # pawns
+    for x in 1..8 do
+      Pawn.create(
+        game_id: self.id,
+        location_x: x,
+        location_y: 2,
+        status: "uncaptured"
+      )
+    end
+
+    # rooks
+    Rook.create(
+      game_id: self.id,
+      location_x: 1,
+      location_y: 1,
+      status: "uncaptured"
+    )
+    Rook.create(
+      game_id: self.id,
+      location_x: 8,
+      location_y: 1,
+      status: "uncaptured"
+    )
+
+    # knights
+    Knight.create(
+      game_id: self.id,
+      location_x: 2,
+      location_y: 1,
+      status: "uncaptured"
+    )
+    Knight.create(
+      game_id: self.id,
+      location_x: 7,
+      location_y: 1,
+      status: "uncaptured"
+    )
+
+    # bishops
+    Bishop.create(
+      game_id: self.id,
+      location_x: 3,
+      location_y: 1,
+      status: "uncaptured"
+    )
+    Bishop.create(
+      game_id: self.id,
+      location_x: 6,
+      location_y: 1,
+      status: "uncaptured"
+    )
+
+    # king
+    King.create(
+      game_id: self.id,
+      location_x: 5,
+      location_y: 1,
+      status: "uncaptured"
+    )
+
+    # queen
+    Queen.create(
+      game_id: self.id,
+      location_x: 4,
+      location_y: 1,
+      status: "uncaptured"
+    )
+
+  # black pieces
+    # pawns
+    for x in 1..8 do
+      Pawn.create(
+        game_id: self.id,
+        location_x: x,
+        location_y: 7,
+        status: "uncaptured"
+      )
+    end
+
+    # rooks
+    Rook.create(
+      game_id: self.id,
+      location_x: 1,
+      location_y: 8,
+      status: "uncaptured"
+    )
+    Rook.create(
+      game_id: self.id,
+      location_x: 8,
+      location_y: 8,
+      status: "uncaptured"
+    )
+
+    # knights
+    Knight.create(
+      game_id: self.id,
+      location_x: 2,
+      location_y: 8,
+      status: "uncaptured"
+    )
+    Knight.create(
+      game_id: self.id,
+      location_x: 7,
+      location_y: 8,
+      status: "uncaptured"
+    )
+
+    # bishops
+    Bishop.create(
+      game_id: self.id,
+      location_x: 3,
+      location_y: 8,
+      status: "uncaptured"
+    )
+    Bishop.create(
+      game_id: self.id,
+      location_x: 6,
+      location_y: 8,
+      status: "uncaptured"
+    )
+
+    # king
+    King.create(
+      game_id: self.id,
+      location_x: 5,
+      location_y: 8,
+      status: "uncaptured"
+    )
+
+    # queen
+    Queen.create(
+      game_id: self.id,
+      location_x: 4,
+      location_y: 8,
+      status: "uncaptured"
+    )
+  end
 end
 
