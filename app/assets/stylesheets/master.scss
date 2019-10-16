@@ -36,7 +36,28 @@
   padding: 0;
   margin: auto;
 }
-
+.highlighted-black {
+  background-color: #D3B7A1;
+  height: 12.5%;
+  width: 12.5%;
+  max-height: 100vw;
+  max-width: 100vw;
+  float: left;
+  padding: 0;
+  margin: auto;
+  border: 5px solid #4B4444;
+}
+.highlighted-white {
+  background-color: #F1E8D9;
+  height: 12.5%;
+  width: 12.5%;
+  max-height: 100vw;
+  max-width: 100vw;
+  float: left;
+  padding: 0;
+  margin: auto;
+  border: 5px solid #4B4444;
+}
 .booyah-box {
   -moz-box-shadow: 1px 1px 2px 0 #d0d0d0;
   -webkit-box-shadow: 1px 1px 2px 0 #d0d0d0;
