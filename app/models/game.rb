@@ -13,8 +13,9 @@ class Game < ApplicationRecord
   def populate_game
   # white pieces
     # pawns
+    @pawns = []
     for x in 1..8 do
-      Piece::Pawn.new(
+      @pawns << Piece::Pawn.new(
         game_id: self.id,
         player_id: self.user_id,
         location_x: x,
@@ -24,14 +25,15 @@ class Game < ApplicationRecord
     end
 
     # rooks
-      Piece::Rook.new(
+    @rooks = []
+      @rooks << Piece::Rook.new(
         game_id: self.id,
         player_id: self.user_id,
         location_x: 1,
         location_y: 1,
         status: "uncaptured"
       )
-      Piece::Rook.new(
+      @rooks << Piece::Rook.new(
         game_id: self.id,
         player_id: self.user_id,
         location_x: 8,
@@ -40,14 +42,15 @@ class Game < ApplicationRecord
       )
 
     # knights
-      Piece::Knight.new(
+    @knights = []
+      @knights << Piece::Knight.new(
         game_id: self.id,
         player_id: self.user_id,
         location_x: 2,
         location_y: 1,
         status: "uncaptured"
       )
-      Piece::Knight.new(
+      @knights << Piece::Knight.new(
         game_id: self.id,
         player_id: self.user_id,
         location_x: 7,
@@ -56,14 +59,15 @@ class Game < ApplicationRecord
       )
 
     # bishops
-      Piece::Bishop.new(
+    @bishops = []
+      @bishops << Piece::Bishop.new(
         game_id: self.id,
         player_id: self.user_id,
         location_x: 3,
         location_y: 1,
         status: "uncaptured"
       )
-      Piece::Bishop.new(
+      @bishops << Piece::Bishop.new(
         game_id: self.id,
         player_id: self.user_id,
         location_x: 6,
@@ -72,7 +76,8 @@ class Game < ApplicationRecord
       )
 
     # king
-      Piece::King.new(
+    @kings = []
+      @kings << Piece::King.new(
         game_id: self.id,
         player_id: self.user_id,
         location_x: 5,
@@ -81,7 +86,8 @@ class Game < ApplicationRecord
       )
 
     # queen
-      Piece::Queen.new(
+    @queens = []
+      @queens << Piece::Queen.new(
         game_id: self.id,
         player_id: self.user_id,
         location_x: 4,
@@ -92,7 +98,7 @@ class Game < ApplicationRecord
   # black pieces
     # pawns
       for x in 1..8 do
-        Piece::Pawn.new(
+        @pawns << Piece::Pawn.new(
           game_id: self.id,
           location_x: x,
           location_y: 7,
@@ -101,13 +107,13 @@ class Game < ApplicationRecord
       end
 
     # rooks
-      Piece::Rook.new(
+      @rooks << Piece::Rook.new(
         game_id: self.id,
         location_x: 1,
         location_y: 8,
         status: "uncaptured"
       )
-      Piece::Rook.new(
+      @rooks << Piece::Rook.new(
         game_id: self.id,
         location_x: 8,
         location_y: 8,
@@ -115,13 +121,13 @@ class Game < ApplicationRecord
       )
 
     # knights
-      Piece::Knight.new(
+      @knights << Piece::Knight.new(
         game_id: self.id,
         location_x: 2,
         location_y: 8,
         status: "uncaptured"
       )
-      Piece::Knight.new(
+      @knights << Piece::Knight.new(
         game_id: self.id,
         location_x: 7,
         location_y: 8,
@@ -129,13 +135,13 @@ class Game < ApplicationRecord
       )
 
     # bishops
-      Piece::Bishop.new(
+      @bishops << Piece::Bishop.new(
         game_id: self.id,
         location_x: 3,
         location_y: 8,
         status: "uncaptured"
       )
-      Piece::Bishop.new(
+      @bishops << Piece::Bishop.new(
         game_id: self.id,
         location_x: 6,
         location_y: 8,
@@ -143,7 +149,7 @@ class Game < ApplicationRecord
       )
 
     # king
-      Piece::King.new(
+      @kings << Piece::King.new(
         game_id: self.id,
         location_x: 5,
         location_y: 8,
@@ -151,7 +157,7 @@ class Game < ApplicationRecord
       )
 
     # queen
-      Piece::Queen.new(
+      @queens << Piece::Queen.new(
         game_id: self.id,
         location_x: 4,
         location_y: 8,
