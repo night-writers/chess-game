@@ -16,7 +16,6 @@ class Game < ApplicationRecord
     # pawns
     for x in 1..8 do
       Piece::Pawn.new(
-        piece_type: 'pawn',
         game_id: self.id,
         location_x: x,
         location_y: 2,
@@ -26,14 +25,12 @@ class Game < ApplicationRecord
 
     # rooks
       Piece.new(
-        piece_type: 'rook',
         game_id: self.id,
         location_x: 1,
         location_y: 1,
         status: "uncaptured"
       )
       Piece.new(
-        piece_type: 'rook',
         game_id: self.id,
         location_x: 8,
         location_y: 1,
@@ -42,14 +39,12 @@ class Game < ApplicationRecord
 
     # knights
       Piece.new(
-        piece_type: 'knight',
         game_id: self.id,
         location_x: 2,
         location_y: 1,
         status: "uncaptured"
       )
       Piece.new(
-        piece_type: 'knight',
         game_id: self.id,
         location_x: 7,
         location_y: 1,
@@ -58,14 +53,12 @@ class Game < ApplicationRecord
 
     # # bishops
       Piece.new(
-        piece_type: 'bishop',
         game_id: self.id,
         location_x: 3,
         location_y: 1,
         status: "uncaptured"
       )
       Piece.new(
-        piece_type: 'bishop',
         game_id: self.id,
         location_x: 6,
         location_y: 1,
@@ -74,7 +67,6 @@ class Game < ApplicationRecord
 
     # # king
       Piece.new(
-        piece_type: 'king',
         game_id: self.id,
         location_x: 5,
         location_y: 1,
@@ -83,7 +75,6 @@ class Game < ApplicationRecord
 
     # queen
       Piece.new(
-        piece_type: 'queen',
         game_id: self.id,
         location_x: 4,
         location_y: 1,
@@ -94,7 +85,6 @@ class Game < ApplicationRecord
     # pawns
       for x in 1..8 do
         Piece.new(
-          piece_type: 'pawn',
           game_id: self.id,
           location_x: x,
           location_y: 7,
@@ -104,14 +94,12 @@ class Game < ApplicationRecord
 
     # rooks
       Piece.new(
-        piece_type: 'rook',
         game_id: self.id,
         location_x: 1,
         location_y: 8,
         status: "uncaptured"
       )
       Piece.new(
-        piece_type: 'rook',
         game_id: self.id,
         location_x: 8,
         location_y: 8,
@@ -120,14 +108,12 @@ class Game < ApplicationRecord
 
     # knights
       Piece.new(
-        piece_type: 'knight',
         game_id: self.id,
         location_x: 2,
         location_y: 8,
         status: "uncaptured"
       )
       Piece.new(
-        piece_type: 'knight',
         game_id: self.id,
         location_x: 7,
         location_y: 8,
@@ -136,14 +122,12 @@ class Game < ApplicationRecord
 
     # bishops
       Piece.new(
-        piece_type: 'bishop',
         game_id: self.id,
         location_x: 3,
         location_y: 8,
         status: "uncaptured"
       )
       Piece.new(
-        piece_type: 'bishop',
         game_id: self.id,
         location_x: 6,
         location_y: 8,
@@ -152,7 +136,6 @@ class Game < ApplicationRecord
 
     # king
       Piece.new(
-        piece_type: 'king',
         game_id: self.id,
         location_x: 5,
         location_y: 8,
@@ -161,7 +144,6 @@ class Game < ApplicationRecord
 
     # queen
       Piece.new(
-        piece_type: 'queen',
         game_id: self.id,
         location_x: 4,
         location_y: 8,
