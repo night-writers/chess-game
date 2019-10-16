@@ -12,7 +12,6 @@ class Game < ApplicationRecord
 
   def populate_game
   # white pieces
-
     # pawns
     for x in 1..8 do
       Piece::Pawn.new(
@@ -24,13 +23,13 @@ class Game < ApplicationRecord
     end
 
     # rooks
-      Piece.new(
+      Piece::Rook.new(
         game_id: self.id,
         location_x: 1,
         location_y: 1,
         status: "uncaptured"
       )
-      Piece.new(
+      Piece::Rook.new(
         game_id: self.id,
         location_x: 8,
         location_y: 1,
@@ -38,35 +37,35 @@ class Game < ApplicationRecord
       )
 
     # knights
-      Piece.new(
+      Piece::Knight.new(
         game_id: self.id,
         location_x: 2,
         location_y: 1,
         status: "uncaptured"
       )
-      Piece.new(
+      Piece::Knight.new(
         game_id: self.id,
         location_x: 7,
         location_y: 1,
         status: "uncaptured"
       )
 
-    # # bishops
-      Piece.new(
+    # bishops
+      Piece::Bishop.new(
         game_id: self.id,
         location_x: 3,
         location_y: 1,
         status: "uncaptured"
       )
-      Piece.new(
+      Piece::Bishop.new(
         game_id: self.id,
         location_x: 6,
         location_y: 1,
         status: "uncaptured"
       )
 
-    # # king
-      Piece.new(
+    # king
+      Piece::King.new(
         game_id: self.id,
         location_x: 5,
         location_y: 1,
@@ -74,7 +73,7 @@ class Game < ApplicationRecord
       )
 
     # queen
-      Piece.new(
+      Piece::Queen.new(
         game_id: self.id,
         location_x: 4,
         location_y: 1,
@@ -84,7 +83,7 @@ class Game < ApplicationRecord
   # black pieces
     # pawns
       for x in 1..8 do
-        Piece.new(
+        Piece::Pawn.new(
           game_id: self.id,
           location_x: x,
           location_y: 7,
@@ -93,13 +92,13 @@ class Game < ApplicationRecord
       end
 
     # rooks
-      Piece.new(
+      Piece::Rook.new(
         game_id: self.id,
         location_x: 1,
         location_y: 8,
         status: "uncaptured"
       )
-      Piece.new(
+      Piece::Rook.new(
         game_id: self.id,
         location_x: 8,
         location_y: 8,
@@ -107,13 +106,13 @@ class Game < ApplicationRecord
       )
 
     # knights
-      Piece.new(
+      Piece::Knight.new(
         game_id: self.id,
         location_x: 2,
         location_y: 8,
         status: "uncaptured"
       )
-      Piece.new(
+      Piece::Knight.new(
         game_id: self.id,
         location_x: 7,
         location_y: 8,
@@ -121,13 +120,13 @@ class Game < ApplicationRecord
       )
 
     # bishops
-      Piece.new(
+      Piece::Bishop.new(
         game_id: self.id,
         location_x: 3,
         location_y: 8,
         status: "uncaptured"
       )
-      Piece.new(
+      Piece::Bishop.new(
         game_id: self.id,
         location_x: 6,
         location_y: 8,
@@ -135,7 +134,7 @@ class Game < ApplicationRecord
       )
 
     # king
-      Piece.new(
+      Piece::King.new(
         game_id: self.id,
         location_x: 5,
         location_y: 8,
@@ -143,7 +142,7 @@ class Game < ApplicationRecord
       )
 
     # queen
-      Piece.new(
+      Piece::Queen.new(
         game_id: self.id,
         location_x: 4,
         location_y: 8,
