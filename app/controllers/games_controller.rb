@@ -26,9 +26,6 @@ class GamesController < ApplicationController
     end
   end
 
-  def join
-  end
-
   private
 
   def game_params
