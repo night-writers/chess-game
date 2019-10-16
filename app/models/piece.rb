@@ -1,8 +1,5 @@
 class Piece < ApplicationRecord
   belongs_to :game
-  def self.table_name_prefix
-    'piece_'
-  end
   
   def self.is_obstructed_horizontal?(xd, xl, yl)
       x_value = xl
@@ -85,6 +82,14 @@ class Piece < ApplicationRecord
   def self.is_occupied(x, y)
       return true
     #game.pieces.where(location_x: x, location_y: y).present?
+  end
+
+  def self.valid_move?(location_x, location_y, destination_x, destination_y)
+    if (location_x - destination_x) <= 1 && (location_y - destination_y) <= 1 && (destination_x - location_x) <= 1 && (destination_y - location_y) <= 1
+      return true
+    else
+      return false
+    end
   end
 
 end

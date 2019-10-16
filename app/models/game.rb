@@ -9,5 +9,164 @@ class Game < ApplicationRecord
     self.status ||= "available"
     self.white_player_id ||= self.user_id
   end
+
+  def populate_game
+  # white pieces
+
+    # pawns
+    for x in 1..8 do
+      Piece::Pawn.new(
+        piece_type: 'pawn',
+        game_id: self.id,
+        location_x: x,
+        location_y: 2,
+        status: "uncaptured"
+      )
+    end
+
+    # rooks
+      Piece.new(
+        piece_type: 'rook',
+        game_id: self.id,
+        location_x: 1,
+        location_y: 1,
+        status: "uncaptured"
+      )
+      Piece.new(
+        piece_type: 'rook',
+        game_id: self.id,
+        location_x: 8,
+        location_y: 1,
+        status: "uncaptured"
+      )
+
+    # knights
+      Piece.new(
+        piece_type: 'knight',
+        game_id: self.id,
+        location_x: 2,
+        location_y: 1,
+        status: "uncaptured"
+      )
+      Piece.new(
+        piece_type: 'knight',
+        game_id: self.id,
+        location_x: 7,
+        location_y: 1,
+        status: "uncaptured"
+      )
+
+    # # bishops
+      Piece.new(
+        piece_type: 'bishop',
+        game_id: self.id,
+        location_x: 3,
+        location_y: 1,
+        status: "uncaptured"
+      )
+      Piece.new(
+        piece_type: 'bishop',
+        game_id: self.id,
+        location_x: 6,
+        location_y: 1,
+        status: "uncaptured"
+      )
+
+    # # king
+      Piece.new(
+        piece_type: 'king',
+        game_id: self.id,
+        location_x: 5,
+        location_y: 1,
+        status: "uncaptured"
+      )
+
+    # queen
+      Piece.new(
+        piece_type: 'queen',
+        game_id: self.id,
+        location_x: 4,
+        location_y: 1,
+        status: "uncaptured"
+      )
+
+  # black pieces
+    # pawns
+      for x in 1..8 do
+        Piece.new(
+          piece_type: 'pawn',
+          game_id: self.id,
+          location_x: x,
+          location_y: 7,
+          status: "uncaptured"
+        )
+      end
+
+    # rooks
+      Piece.new(
+        piece_type: 'rook',
+        game_id: self.id,
+        location_x: 1,
+        location_y: 8,
+        status: "uncaptured"
+      )
+      Piece.new(
+        piece_type: 'rook',
+        game_id: self.id,
+        location_x: 8,
+        location_y: 8,
+        status: "uncaptured"
+      )
+
+    # knights
+      Piece.new(
+        piece_type: 'knight',
+        game_id: self.id,
+        location_x: 2,
+        location_y: 8,
+        status: "uncaptured"
+      )
+      Piece.new(
+        piece_type: 'knight',
+        game_id: self.id,
+        location_x: 7,
+        location_y: 8,
+        status: "uncaptured"
+      )
+
+    # bishops
+      Piece.new(
+        piece_type: 'bishop',
+        game_id: self.id,
+        location_x: 3,
+        location_y: 8,
+        status: "uncaptured"
+      )
+      Piece.new(
+        piece_type: 'bishop',
+        game_id: self.id,
+        location_x: 6,
+        location_y: 8,
+        status: "uncaptured"
+      )
+
+    # king
+      Piece.new(
+        piece_type: 'king',
+        game_id: self.id,
+        location_x: 5,
+        location_y: 8,
+        status: "uncaptured"
+      )
+
+    # queen
+      Piece.new(
+        piece_type: 'queen',
+        game_id: self.id,
+        location_x: 4,
+        location_y: 8,
+        status: "uncaptured"
+      )
+  end
 end
 

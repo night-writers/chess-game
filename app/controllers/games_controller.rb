@@ -12,6 +12,7 @@ class GamesController < ApplicationController
 
   def create
     @game = current_user.games.create(game_params)
+    @game.populate_game
     redirect_to root_path
   end
 
@@ -23,9 +24,6 @@ class GamesController < ApplicationController
     else
       redirect_back(fallback_location: root_path, alert: 'You have already joined this game.')
     end
-  end
-
-  def join
   end
 
   private
