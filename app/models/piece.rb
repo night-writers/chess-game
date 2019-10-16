@@ -79,9 +79,9 @@ class Piece < ApplicationRecord
   end
   
   # Temporary method until functionality for adding pieces to a game is added.
-  def self.is_occupied(x, y)
+  def self.is_occupied?(x, y)
       return true
-    #game.pieces.where(location_x: x, location_y: y).present?
+      game.pieces.where(location_x: x, location_y: y).present?
   end
 
   def self.valid_move?(location_x, location_y, destination_x, destination_y)
@@ -91,5 +91,34 @@ class Piece < ApplicationRecord
       return false
     end
   end
+
+
+# move_to! - captured pseudocode method
+  #def move_to!(new_x, new_y)
+
+  #check to see if there is a piece in the location it's moving to.
+  #  if self.is_occupied? == false
+  #  piece.current_player = piece.update_attributes(new_x, new_y)
+
+  #  else 
+
+  #  end
+
+  #if there is a piece of opposite color occupying the location, remove piece from board.
+  #  if current_piece_color != destination_piece_color
+  #    then self.destination_piece = piece.update_attributes(null, null)
+  #    alert "#{game.current_player} captured #{destination_piece_color}"
+  #  end
+
+  # if there is a piece of the same color there, reset current player's piece position and display alert message
+  #  if self.is_occupied?(new_x, new_y) current_piece_color == destination_piece_color
+  #    then piece.reset_turn
+  #    alert "{game.current_player} has made an invalid move, try again."
+  #  end
+
+  # call update_attributes on the current player's piece and change the piece's x/y coords.
+    #  piece.current_player = piece.update_attributes(new_x, new_y)
+  # end
+
 
 end
