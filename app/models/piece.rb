@@ -109,7 +109,7 @@ class Piece < ApplicationRecord
         piece_at_destination.capture_piece!
         update_piece_location!(new_x, new_y)
       else
-        alert: 'Player has made an invalid move, try again.'
+        raise 'Player has made an invalid move, try again.'
       end
 
     else
