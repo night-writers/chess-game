@@ -4,6 +4,7 @@ class GamesController < ApplicationController
     if @game.blank?
       render_not_found
     end
+    @pieces = @game.pieces
   end
 
   def new
@@ -27,6 +28,13 @@ class GamesController < ApplicationController
   end
 
   private
+
+  helper_method :piece_at
+  def piece_at(location_x, location_y)
+    @game = Game.find(params[:id])
+    @pieces = @game.pieces
+    return @pieces.
+  end
 
   def game_params
     params.require(:game).permit(:name)
