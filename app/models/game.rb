@@ -1,5 +1,5 @@
 class Game < ApplicationRecord
-  has_many :pieces
+  has_many :pieces, dependent: :destroy
   has_many :comments
   after_initialize :init
   belongs_to :user, optional: true
