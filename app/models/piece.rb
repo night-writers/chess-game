@@ -92,32 +92,28 @@ class Piece < ApplicationRecord
     end
   end
 
+  def capture_piece!
+    update_attributes({location_x: nil, location_y: nil, status: "captured"})
+  end
+
+  def update_piece_location!(new_x, new_y)
+    self.update_attributes({location_x: new_x, location_y: new_y})
+  end
 
 # move_to! - captured method
   def move_to!(new_x, new_y)
 
-  #check to see if there is a piece in the location it's moving to.
-    if is_occupied? == false
-      update_attributes(location_x: new_x, location_y: new_y)
-      redirect_back(fallback_location: root_path, alert: '#{current_user.id} moved to #{new_x, new_y}.')
-      return
+    if is_occupied?(new_x, new_y)
+      piece_at_destination = game.pieces.find_by(location_x: new_x, location_y: new_y)
+      if piece_at_destination.user != self.user
+        piece_at_destination.capture_piece!
+        update_piece_location!(new_x, new_y)
+      else
+        alert: 'Player has made an invalid move, try again.'
+      end
+
     else
-
-#if there is a piece of opposite color occupying the location, remove piece from board.
-      if self.piece.color != destination_piece_color
-        update_attributes(location_x: null, location_y: null)
-        destination_piece.update_attributes(status: "captured")
-        redirect_back(fallback_location: root_path, alert: '#{current_user.id} captured the #{piece.type}!')
-        return
-      end
-
-  # if there is a piece of the same color there, reset current player's piece position and display alert message
-      if current_piece_color == destination_piece_color
-        then piece.reset_turn
-        redirect_back(fallback_location: root_path, alert: '#{current_user.id} has made an invalid move, try again.')
-        return
-      end
+      update_piece_location!(new_x, new_y)
     end
   end
-
 end
