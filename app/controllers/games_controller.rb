@@ -4,10 +4,15 @@ class GamesController < ApplicationController
     if @game.blank?
       render_not_found
     end
+    @pieces = @game.pieces
   end
 
   def new
-    @game = Game.new
+    if current_user 
+      @game = Game.new
+    else
+      redirect_to new_user_session_path
+    end
   end
 
   def create
@@ -27,6 +32,24 @@ class GamesController < ApplicationController
   end
 
   private
+
+  helper_method :piece_at
+  def piece_at(x, y)
+    piece_id = 0
+   @pieces.each do |piece|
+      if piece.location_x == x && piece.location_y == y
+        piece_id = piece.id
+      end
+    end
+    if(piece_id != 0)
+      return piece_id
+    end
+  end
+
+  helper_method :current_game
+  def current_game
+    @current_game ||= Game.find(params[:id])
+  end
 
   def game_params
     params.require(:game).permit(:name)

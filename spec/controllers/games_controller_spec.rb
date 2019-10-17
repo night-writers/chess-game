@@ -2,7 +2,9 @@ require 'rails_helper'
 
 RSpec.describe GamesController, type: :controller do
   describe "games#new" do
-    it "should successfully display the new game creation page" do
+    it "should successfully display the new game creation page if a user is signed in" do
+      user = FactoryBot.create(:user)
+      sign_in user
       get :new
       expect(response).to have_http_status(:success)
     end
