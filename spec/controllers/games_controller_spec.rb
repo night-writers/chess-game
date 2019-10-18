@@ -43,4 +43,27 @@ RSpec.describe GamesController, type: :controller do
       expect(game.black_player_id).to eq(user.id)
     end
   end
+
+  describe 'capture_piece!' do
+    it 'should set the captured piece to nill' do
+      user = FactoryBot.create(:user)
+      game = FactoryBot.create(:game)
+      piece = FactoryBot.create(:piece, id: 1, location_x: 1, location_y: 2, game_id: game.id, player_id: game.user_id)
+      piece.capture_piece!
+      expect(piece.status).to eq("captured")
+    end
+  end
+
+  describe 'update_piece_location!' do
+    it 'should update the piece location' do
+      user = FactoryBot.create(:user)
+      game = FactoryBot.create(:game)
+      piece = FactoryBot.create(:piece, id: 1, location_x: 1, location_y: 2, game_id: game.id, player_id: game.user_id)
+      piece.update_piece_location!(2, 4)
+
+      expect(piece.location_x).to eq(2)
+      expect(piece.location_y).to eq(4)
+    end
+  end
+  
 end
