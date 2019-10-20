@@ -72,8 +72,36 @@
   <div id="g1" class="black"></div>
   <div id="h1" class="white"></div>
 </div>
-
-<div><p>piece x location: <%= @piece.location_x %></p></div>
-
-<%= @game.black_player_id %>
-<%= @game.white_player_id %>
+<script>
+  $(function() {
+    getDiv(<%= @piece.location_x %>,<%= @piece.location_y %>);
+    function getDiv(x,y) {
+      var new_x = "";
+      switch (x) {
+        case 1: new_x = "a";
+        break;
+        case 2: new_x = "b";
+        break;
+        case 3: new_x = "c";
+        break;
+        case 4: new_x = "d";
+        break;
+        case 5: new_x = "e";
+        break;
+        case 6: new_x = "f";
+        break;
+        case 7: new_x = "g";
+        break;
+        case 8: new_x = "h";
+        break;
+      };
+      var divSelector = '#' + new_x + y;
+      var currentClass = $(divSelector).attr('class');
+      if (currentClass = "white") {
+        $(divSelector).addClass("highlighted-white");  
+      } else {
+        $(divSelector).addClass("highlighted-black");  
+      }
+    }
+  });
+</script>
