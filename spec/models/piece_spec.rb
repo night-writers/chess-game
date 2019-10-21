@@ -39,4 +39,32 @@ RSpec.describe Piece, type: :model do
       game = FactoryBot.create(:game)
       expect(Piece.is_obstructed?(4, 4, 1, 5, game)).to eq "invalid input.  Not diagnal, horizontal, or vertical."
     end
+    it "should return true if the move for the king is valid" do
+      game = FactoryBot.create(:game)
+      expect(Piece::King.valid_move?(2, 2, 1, 2)).to eq true
+      expect(Piece::King.valid_move?(2, 2, 2, 1)).to eq true
+      expect(Piece::King.valid_move?(2, 2, 1, 1)).to eq true
+    end
+    it "should return false if the move for the king is invalid" do
+      game = FactoryBot.create(:game)
+      expect(Piece::King.valid_move?(2, 2, 1, 5)).to eq false
+      expect(Piece::King.valid_move?(3, 3, 1, 3)).to eq false
+      expect(Piece::King.valid_move?(3, 3, 3, 1)).to eq false
+      expect(Piece::King.valid_move?(3, 3, 1, 1)).to eq false
+    end
+    it "should return true if the move for the queen is valid" do
+      game = FactoryBot.create(:game)
+      expect(Piece::Queen.valid_move?(4, 2, 1, 2, game)).to eq true
+      expect(Piece::Queen.valid_move?(2, 4, 2, 1, game)).to eq true
+      expect(Piece::Queen.valid_move?(4, 4, 1, 1, game)).to eq true
+    end
+    it "should return false if the move for the queen is invalid" do
+      user = FactoryBot.create(:user)
+      game = FactoryBot.create(:game)
+      expect(Piece::Queen.valid_move?(4, 4, 1, 5, game)).to eq false
+      piece = FactoryBot.create(:piece, id: 1, location_x: 2, location_y: 2, game_id: game.id, player_id: game.user_id)
+      expect(Piece::Queen.valid_move?(4, 2, 1, 2, game)).to eq false
+      expect(Piece::Queen.valid_move?(2, 4, 2, 1, game)).to eq false
+      expect(Piece::Queen.valid_move?(4, 4, 1, 1, game)).to eq false
+    end     
 end
