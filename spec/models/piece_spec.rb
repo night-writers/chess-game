@@ -68,7 +68,7 @@ RSpec.describe Piece, type: :model do
       expect(Piece::Queen.valid_move?(4, 4, 1, 1, game)).to eq false
     end    
     it "should return true if the move for the knight is valid" do
-      game = FactoryBot.create(:game)
+      #game = FactoryBot.create(:game)
       expect(Piece::Knight.valid_move?(3, 3, 1, 2)).to eq true
       expect(Piece::Knight.valid_move?(3, 3, 1, 4)).to eq true
       expect(Piece::Knight.valid_move?(3, 3, 2, 1)).to eq true
@@ -80,7 +80,7 @@ RSpec.describe Piece, type: :model do
       expect(Piece::Knight.valid_move?(4, 1, 5, 3)).to eq true
     end
     it "should return false if the move for the knight is valid" do
-      game = FactoryBot.create(:game)
+      #game = FactoryBot.create(:game)
       expect(Piece::Knight.valid_move?(3, 3, 1, 1)).to eq false
       expect(Piece::Knight.valid_move?(4, 1, 2, 4)).to eq false
     end
