@@ -47,6 +47,7 @@ class GamesController < ApplicationController
   end
 
   helper_method :piece_move
+  def piece_move
     @piece.move_to!(params[:x_location], params[:y_location])
     redirect_to game_path(@piece.game)
   end
@@ -59,5 +60,4 @@ class GamesController < ApplicationController
   def game_params
     params.require(:game).permit(:name)
   end
-end
 end
