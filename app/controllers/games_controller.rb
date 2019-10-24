@@ -23,11 +23,11 @@ class GamesController < ApplicationController
 
   def update
     @game = Game.find(params[:id])
-    if @game.black_player_id != current_user
-      @game.update_attribute(:black_player_id, current_user.id)
+    if @game.white_player_id != current_user.id && @game.black_player_id != current_user.id 
+      @game.update_attribute(:black_player_id, current_user.id) 
       redirect_back(fallback_location: root_path, alert: 'You have joined the game as the Black player.')
     else
-      redirect_back(fallback_location: root_path, alert: 'You have already joined this game.')
+      alert: 'You have already joined this game.'
     end
   end
 
@@ -46,6 +46,11 @@ class GamesController < ApplicationController
     end
   end
 
+  helper_method :piece_move
+    @piece.move_to!(params[:x_location], params[:y_location])
+    redirect_to game_path(@piece.game)
+  end
+  
   helper_method :current_game
   def current_game
     @current_game ||= Game.find(params[:id])
