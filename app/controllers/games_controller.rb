@@ -60,3 +60,4 @@ class GamesController < ApplicationController
     params.require(:game).permit(:name)
   end
 end
+end
