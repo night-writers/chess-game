@@ -27,7 +27,7 @@ class GamesController < ApplicationController
       @game.update_attribute(:black_player_id, current_user.id) 
       redirect_back(fallback_location: root_path, alert: 'You have joined the game as the Black player.')
     else
-      alert: 'You have already joined this game.'
+      redirect_back(fallback_location: root_path, alert: 'You have already joined this game.')
     end
   end
 
