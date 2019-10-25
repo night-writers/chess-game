@@ -31,6 +31,14 @@ class GamesController < ApplicationController
     end
   end
 
+  def destroy
+    @game = Game.find(params[:id])
+    return render_not_found if @game.blank?
+    @game.update_attribute(:status, "complete")
+    @game.destroy
+    redirect_back(fallback_location: root_path, alert: 'Player has forfeited, game over!')
+  end
+
   private
 
   helper_method :piece_at
@@ -44,12 +52,6 @@ class GamesController < ApplicationController
     if(piece_id != 0)
       return piece_id
     end
-  end
-
-  helper_method :piece_move
-  def piece_move
-    @piece.move_to!(params[:x_location], params[:y_location])
-    redirect_to game_path(@piece.game)
   end
   
   helper_method :current_game
