@@ -109,4 +109,31 @@ RSpec.describe Piece, type: :model do
       expect(Piece::Bishop.valid_move?(3, 1, 5, 2, game)).to eq false
       expect(Piece::Bishop.valid_move?(3, 1, 3, 3, game)).to eq false
     end
+    it "should return true if the move for the pawn is valid" do
+      user = FactoryBot.create(:user)
+      game = FactoryBot.create(:game, user_id: 1, white_player_id: 1)
+      game2 = FactoryBot.create(:game, user_id: 2, black_player_id: 2)
+      expect(Piece::Pawn.valid_move?(3, 2, 3, 4, game)).to eq true
+      expect(Piece::Pawn.valid_move?(2, 4, 2, 5, game)).to eq true
+      expect(Piece::Pawn.valid_move?(3, 7, 3, 5, game2)).to eq true
+      expect(Piece::Pawn.valid_move?(3, 6, 3, 5, game2)).to eq true
+      piece = FactoryBot.create(:piece, id: 1, location_x: 4, location_y: 4, game_id: game.id, player_id: game.user_id)
+      expect(Piece::Pawn.valid_move?(3, 3, 4, 4, game)).to eq true
+    end
+    it "should return false if the move for the pawn is invalid" do
+      user = FactoryBot.create(:user)
+      game = FactoryBot.create(:game, user_id: 1, white_player_id: 1)
+      game2 = FactoryBot.create(:game, user_id: 2, black_player_id: 2)
+      expect(Piece::Pawn.valid_move?(3, 2, 3, 5, game)).to eq false
+      expect(Piece::Pawn.valid_move?(2, 4, 2, 6, game)).to eq false
+      expect(Piece::Pawn.valid_move?(2, 4, 4, 4, game)).to eq false
+      expect(Piece::Pawn.valid_move?(3, 2, 3, 1, game)).to eq false
+      expect(Piece::Pawn.valid_move?(3, 3, 4, 4, game)).to eq false
+      expect(Piece::Pawn.valid_move?(3, 3, 3, 3, game)).to eq false
+      expect(Piece::Pawn.valid_move?(3, 7, 3, 4, game2)).to eq false
+      expect(Piece::Pawn.valid_move?(3, 6, 3, 4, game2)).to eq false
+      expect(Piece::Pawn.valid_move?(3, 7, 3, 8, game2)).to eq false
+      piece = FactoryBot.create(:piece, id: 1, location_x: 3, location_y: 4, game_id: game.id, player_id: game.user_id)
+      expect(Piece::Pawn.valid_move?(3, 3, 3, 4, game)).to eq false
+    end     
 end
