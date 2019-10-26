@@ -1,80 +1,76 @@
 <div class="chessboard">
-
-  <% for x in 1..9 %>
-    
-  <% end %>
   <!-- 1st -->
-  <div id="a8" class="white"><%= image_tag piece_at(1,8) %></div>
-  <div id="b8" class="black"><%= image_tag piece_at(2,8) %></div>
-  <div id="c8" class="white"><%= image_tag piece_at(3,8) %></div>
-  <div id="d8" class="black"><%= image_tag piece_at(4,8) %></div>
-  <div id="e8" class="white"><%= image_tag piece_at(5,8) %></div>
-  <div id="f8" class="black"><%= image_tag piece_at(6,8) %></div>
-  <div id="g8" class="white"><%= image_tag piece_at(7,8) %></div>
-  <div id="h8" class="black"><%= image_tag piece_at(8,8) %></div>
+  <div id="a8" class="white"><% if piece_at(1,8) %><%= image_tag piece_at(1,8), class: 'piece' %><% end %></div>
+  <div id="b8" class="black"><% if piece_at(2,8) %><%= image_tag piece_at(2,8), class: 'piece' %><% end %></div>
+  <div id="c8" class="white"><% if piece_at(3,8) %><%= image_tag piece_at(3,8), class: 'piece' %><% end %></div>
+  <div id="d8" class="black"><% if piece_at(4,8) %><%= image_tag piece_at(4,8), class: 'piece' %><% end %></div>
+  <div id="e8" class="white"><% if piece_at(5,8) %><%= image_tag piece_at(5,8), class: 'piece' %><% end %></div>
+  <div id="f8" class="black"><% if piece_at(6,8) %><%= image_tag piece_at(6,8), class: 'piece' %><% end %></div>
+  <div id="g8" class="white"><% if piece_at(7,8) %><%= image_tag piece_at(7,8), class: 'piece' %><% end %></div>
+  <div id="h8" class="black"><% if piece_at(8,8) %><%= image_tag piece_at(8,8), class: 'piece' %><% end %></div>
   <!-- 2nd -->
-  <div id="a7" class="black"><%= image_tag piece_at(1,7) %></div>
-  <div id="b7" class="white"><%= image_tag piece_at(2,7) %></div>
-  <div id="c7" class="black"><%= image_tag piece_at(3,7) %></div>
-  <div id="d7" class="white"><%= image_tag piece_at(4,7) %></div>
-  <div id="e7" class="black"><%= image_tag piece_at(5,7) %></div>
-  <div id="f7" class="white"><%= image_tag piece_at(6,7) %></div>
-  <div id="g7" class="black"><%= image_tag piece_at(7,7) %></div>
-  <div id="h7" class="white"><%= image_tag piece_at(8,7) %></div>
+  <div id="a7" class="black"><% if piece_at(1,7) %><%= image_tag piece_at(1,7), class: 'piece' %><% end %></div>
+  <div id="b7" class="white"><% if piece_at(2,7) %><%= image_tag piece_at(2,7), class: 'piece' %><% end %></div>
+  <div id="c7" class="black"><% if piece_at(3,7) %><%= image_tag piece_at(3,7), class: 'piece' %><% end %></div>
+  <div id="d7" class="white"><% if piece_at(4,7) %><%= image_tag piece_at(4,7), class: 'piece' %><% end %></div>
+  <div id="e7" class="black"><% if piece_at(5,7) %><%= image_tag piece_at(5,7), class: 'piece' %><% end %></div>
+  <div id="f7" class="white"><% if piece_at(6,7) %><%= image_tag piece_at(6,7), class: 'piece' %><% end %></div>
+  <div id="g7" class="black"><% if piece_at(7,7) %><%= image_tag piece_at(7,7), class: 'piece' %><% end %></div>
+  <div id="h7" class="white"><% if piece_at(8,7) %><%= image_tag piece_at(8,7), class: 'piece' %><% end %></div>
   <!-- 3rd -->
-  <div id="a6" class="white"><%= image_tag piece_at(1,6) %></div>
-  <div id="b6" class="black"><%= image_tag piece_at(2,6) %></div>
-  <div id="c6" class="white"><%= image_tag piece_at(3,6) %></div>
-  <div id="d6" class="black"><%= image_tag piece_at(4,6) %></div>
-  <div id="e6" class="white"><%= image_tag piece_at(5,6) %></div>
-  <div id="f6" class="black"><%= image_tag piece_at(6,6) %></div>
-  <div id="g6" class="white"><%= image_tag piece_at(7,6) %></div>
-  <div id="h6" class="black"><%= image_tag piece_at(8,6) %></div>
+  <div id="a6" class="white"><% if piece_at(1,6) %><%= image_tag piece_at(1,6), class: 'piece' %><% end %></div>
+  <div id="b6" class="black"><% if piece_at(2,6) %><%= image_tag piece_at(2,6), class: 'piece' %><% end %></div>
+  <div id="c6" class="white"><% if piece_at(3,6) %><%= image_tag piece_at(3,6), class: 'piece' %><% end %></div>
+  <div id="d6" class="black"><% if piece_at(4,6) %><%= image_tag piece_at(4,6), class: 'piece' %><% end %></div>
+  <div id="e6" class="white"><% if piece_at(5,6) %><%= image_tag piece_at(5,6), class: 'piece' %><% end %></div>
+  <div id="f6" class="black"><% if piece_at(6,6) %><%= image_tag piece_at(6,6), class: 'piece' %><% end %></div>
+  <div id="g6" class="white"><% if piece_at(7,6) %><%= image_tag piece_at(7,6), class: 'piece' %><% end %></div>
+  <div id="h6" class="black"><% if piece_at(8,6) %><%= image_tag piece_at(8,6), class: 'piece' %><% end %></div>
   <!-- 4th -->
-  <div id="a5" class="black"><%= image_tag piece_at(1,5) %></div>
-  <div id="b5" class="white"><%= image_tag piece_at(2,5) %></div>
-  <div id="c5" class="black"><%= image_tag piece_at(3,5) %></div>
-  <div id="d5" class="white"><%= image_tag piece_at(4,5) %></div>
-  <div id="e5" class="black"><%= image_tag piece_at(5,5) %></div>
-  <div id="f5" class="white"><%= image_tag piece_at(6,5) %></div>
-  <div id="g5" class="black"><%= image_tag piece_at(7,5) %></div>
-  <div id="h5" class="white"><%= image_tag piece_at(8,5) %></div>
+  <div id="a5" class="black"><% if piece_at(1,5) %><%= image_tag piece_at(1,5), class: 'piece' %><% end %></div>
+  <div id="b5" class="white"><% if piece_at(2,5) %><%= image_tag piece_at(2,5), class: 'piece' %><% end %></div>
+  <div id="c5" class="black"><% if piece_at(3,5) %><%= image_tag piece_at(3,5), class: 'piece' %><% end %></div>
+  <div id="d5" class="white"><% if piece_at(4,5) %><%= image_tag piece_at(4,5), class: 'piece' %><% end %></div>
+  <div id="e5" class="black"><% if piece_at(5,5) %><%= image_tag piece_at(5,5), class: 'piece' %><% end %></div>
+  <div id="f5" class="white"><% if piece_at(6,5) %><%= image_tag piece_at(6,5), class: 'piece' %><% end %></div>
+  <div id="g5" class="black"><% if piece_at(7,5) %><%= image_tag piece_at(7,5), class: 'piece' %><% end %></div>
+  <div id="h5" class="white"><% if piece_at(8,5) %><%= image_tag piece_at(8,5), class: 'piece' %><% end %></div>
   <!-- 5th -->
-  <div id="a4" class="white"><%= image_tag piece_at(1,4) %></div>
-  <div id="b4" class="black"><%= image_tag piece_at(2,4) %></div>
-  <div id="c4" class="white"><%= image_tag piece_at(3,4) %></div>
-  <div id="d4" class="black"><%= image_tag piece_at(4,4) %></div>
-  <div id="e4" class="white"><%= image_tag piece_at(5,4) %></div>
-  <div id="f4" class="black"><%= image_tag piece_at(6,4) %></div>
-  <div id="g4" class="white"><%= image_tag piece_at(7,4) %></div>
-  <div id="h4" class="black"><%= image_tag piece_at(8,4) %></div>
+  <div id="a4" class="white"><% if piece_at(1,4) %><%= image_tag piece_at(1,4), class: 'piece' %><% end %></div>
+  <div id="b4" class="black"><% if piece_at(2,4) %><%= image_tag piece_at(2,4), class: 'piece' %><% end %></div>
+  <div id="c4" class="white"><% if piece_at(3,4) %><%= image_tag piece_at(3,4), class: 'piece' %><% end %></div>
+  <div id="d4" class="black"><% if piece_at(4,4) %><%= image_tag piece_at(4,4), class: 'piece' %><% end %></div>
+  <div id="e4" class="white"><% if piece_at(5,4) %><%= image_tag piece_at(5,4), class: 'piece' %><% end %></div>
+  <div id="f4" class="black"><% if piece_at(6,4) %><%= image_tag piece_at(6,4), class: 'piece' %><% end %></div>
+  <div id="g4" class="white"><% if piece_at(7,4) %><%= image_tag piece_at(7,4), class: 'piece' %><% end %></div>
+  <div id="h4" class="black"><% if piece_at(8,4) %><%= image_tag piece_at(8,4), class: 'piece' %><% end %></div>
   <!-- 6th -->
-  <div id="a3" class="black"><%= image_tag piece_at(1,3) %></div>
-  <div id="b3" class="white"><%= image_tag piece_at(2,3) %></div>
-  <div id="c3" class="black"><%= image_tag piece_at(3,3) %></div>
-  <div id="d3" class="white"><%= image_tag piece_at(4,3) %></div>
-  <div id="e3" class="black"><%= image_tag piece_at(5,3) %></div>
-  <div id="f3" class="white"><%= image_tag piece_at(6,3) %></div>
-  <div id="g3" class="black"><%= image_tag piece_at(7,3) %></div>
-  <div id="h3" class="white"><%= image_tag piece_at(8,3) %></div>
+  <div id="a3" class="black"><% if piece_at(1,3) %><%= image_tag piece_at(1,3), class: 'piece' %><% end %></div>
+  <div id="b3" class="white"><% if piece_at(2,3) %><%= image_tag piece_at(2,3), class: 'piece' %><% end %></div>
+  <div id="c3" class="black"><% if piece_at(3,3) %><%= image_tag piece_at(3,3), class: 'piece' %><% end %></div>
+  <div id="d3" class="white"><% if piece_at(4,3) %><%= image_tag piece_at(4,3), class: 'piece' %><% end %></div>
+  <div id="e3" class="black"><% if piece_at(5,3) %><%= image_tag piece_at(5,3), class: 'piece' %><% end %></div>
+  <div id="f3" class="white"><% if piece_at(6,3) %><%= image_tag piece_at(6,3), class: 'piece' %><% end %></div>
+  <div id="g3" class="black"><% if piece_at(7,3) %><%= image_tag piece_at(7,3), class: 'piece' %><% end %></div>
+  <div id="h3" class="white"><% if piece_at(8,3) %><%= image_tag piece_at(8,3), class: 'piece' %><% end %></div>
   <!-- 7th -->
-  <div id="a2" class="white"><%= image_tag piece_at(1,2) %></div>
-  <div id="b2" class="black"><%= image_tag piece_at(2,2) %></div>
-  <div id="c2" class="white"><%= image_tag piece_at(3,2) %></div>
-  <div id="d2" class="black"><%= image_tag piece_at(4,2) %></div>
-  <div id="e2" class="white"><%= image_tag piece_at(5,2) %></div>
-  <div id="f2" class="black"><%= image_tag piece_at(6,2) %></div>
-  <div id="g2" class="white"><%= image_tag piece_at(7,2) %></div>
-  <div id="h2" class="black"><%= image_tag piece_at(8,2) %></div>
+  <div id="a2" class="white"><% if piece_at(1,2) %><%= image_tag piece_at(1,2), class: 'piece' %><% end %></div>
+  <div id="b2" class="black"><% if piece_at(2,2) %><%= image_tag piece_at(2,2), class: 'piece' %><% end %></div>
+  <div id="c2" class="white"><% if piece_at(3,2) %><%= image_tag piece_at(3,2), class: 'piece' %><% end %></div>
+  <div id="d2" class="black"><% if piece_at(4,2) %><%= image_tag piece_at(4,2), class: 'piece' %><% end %></div>
+  <div id="e2" class="white"><% if piece_at(5,2) %><%= image_tag piece_at(5,2), class: 'piece' %><% end %></div>
+  <div id="f2" class="black"><% if piece_at(6,2) %><%= image_tag piece_at(6,2), class: 'piece' %><% end %></div>
+  <div id="g2" class="white"><% if piece_at(7,2) %><%= image_tag piece_at(7,2), class: 'piece' %><% end %></div>
+  <div id="h2" class="black"><% if piece_at(8,2) %><%= image_tag piece_at(8,2), class: 'piece' %><% end %></div>
   <!-- 8th -->
-  <div id="a1" class="black"><%= image_tag piece_at(1,1) %></div>
-  <div id="b1" class="white"><%= image_tag piece_at(2,1) %></div>
-  <div id="c1" class="black"><%= image_tag piece_at(3,1) %></div>
-  <div id="d1" class="white"><%= image_tag piece_at(4,1) %></div>
-  <div id="e1" class="black"><%= image_tag piece_at(5,1) %></div>
-  <div id="f1" class="white"><%= image_tag piece_at(6,1) %></div>
-  <div id="g1" class="black"><%= image_tag piece_at(7,1) %></div>
-  <div id="h1" class="white"><%= image_tag piece_at(8,1) %></div>
+  <div id="a1" class="black"><% if piece_at(1,1) %><%= image_tag piece_at(1,1), class: 'piece' %><% end %></div>
+  <div id="b1" class="white"><% if piece_at(2,1) %><%= image_tag piece_at(2,1), class: 'piece' %><% end %></div>
+  <div id="c1" class="black"><% if piece_at(3,1) %><%= image_tag piece_at(3,1), class: 'piece' %><% end %></div>
+  <div id="d1" class="white"><% if piece_at(4,1) %><%= image_tag piece_at(4,1), class: 'piece' %><% end %></div>
+  <div id="e1" class="black"><% if piece_at(5,1) %><%= image_tag piece_at(5,1), class: 'piece' %><% end %></div>
+  <div id="f1" class="white"><% if piece_at(6,1) %><%= image_tag piece_at(6,1), class: 'piece' %><% end %></div>
+  <div id="g1" class="black"><% if piece_at(7,1) %><%= image_tag piece_at(7,1), class: 'piece' %><% end %></div>
+  <div id="h1" class="white"><% if piece_at(8,1) %><%= image_tag piece_at(8,1), class: 'piece' %><% end %></div>
 </div>
 
 <%= @game.black_player_id %>
