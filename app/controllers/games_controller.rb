@@ -23,12 +23,20 @@ class GamesController < ApplicationController
 
   def update
     @game = Game.find(params[:id])
-    if @game.black_player_id != current_user
-      @game.update_attribute(:black_player_id, current_user.id)
+    if @game.white_player_id != current_user.id && @game.black_player_id != current_user.id 
+      @game.update_attribute(:black_player_id, current_user.id) 
       redirect_back(fallback_location: root_path, alert: 'You have joined the game as the Black player.')
     else
       redirect_back(fallback_location: root_path, alert: 'You have already joined this game.')
     end
+  end
+
+  def destroy
+    @game = Game.find(params[:id])
+    return render_not_found if @game.blank?
+    @game.update_attribute(:status, "complete")
+    @game.destroy
+    redirect_back(fallback_location: root_path, alert: 'Player has forfeited, game over!')
   end
 
   private
@@ -45,7 +53,7 @@ class GamesController < ApplicationController
       return piece_id
     end
   end
-
+  
   helper_method :current_game
   def current_game
     @current_game ||= Game.find(params[:id])

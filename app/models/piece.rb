@@ -94,15 +94,10 @@ class Piece < ApplicationRecord
 
     if is_occupied(new_x, new_y, game)
       piece_at_destination = game.pieces.find_by(location_x: new_x, location_y: new_y)
-      if piece_at_destination.user != self.user
-        piece_at_destination.capture_piece!
-        update_piece_location!(new_x, new_y)
-      else
-        raise 'Player has made an invalid move, try again.'
-      end
+      raise 'Invalid move, try again.' unless piece_at_destination.user != self.user
 
-    else
-      update_piece_location!(new_x, new_y)
-    end
+      piece_at_destination.capture_piece!
+    end  
+    update_piece_location!(new_x, new_y)
   end
 end
