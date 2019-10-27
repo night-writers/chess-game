@@ -44,13 +44,15 @@ class GamesController < ApplicationController
   helper_method :piece_at
   def piece_at(x, y)
     piece_id = 0
-   @pieces.each do |piece|
+    piece_img = ""
+    @pieces.each do |piece|
       if piece.location_x == x && piece.location_y == y
         piece_id = piece.id
+        piece_img = piece.image
       end
     end
     if(piece_id != 0)
-      return piece_id
+      return piece_img
     end
   end
   
