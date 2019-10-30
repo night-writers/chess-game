@@ -55,6 +55,19 @@ class GamesController < ApplicationController
       return piece_img
     end
   end
+
+  helper_method :get_id
+  def get_id(x, y)
+    piece_id = 0
+    @pieces.each do |piece|
+      if piece.location_x == x && piece.location_y == y
+        piece_id = piece.id
+      end
+    end
+    if (piece_id != 0)
+      return piece_id
+    end
+  end
   
   helper_method :current_game
   def current_game

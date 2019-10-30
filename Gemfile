@@ -85,3 +85,5 @@ gem 'omniauth-twitter'
 gem 'activerecord-session_store'
 
 gem 'omniauth-google-oauth2'
+
+gem 'jquery-ui-rails'
