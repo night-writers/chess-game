@@ -20,7 +20,8 @@ class Game < ApplicationRecord
         location_x: x,
         location_y: 2,
         image: "/assets/images/pieces/whitepawn.svg",
-        status: "uncaptured"
+        status: "uncaptured",
+        move_count: 0
       )
     end
 
@@ -31,7 +32,8 @@ class Game < ApplicationRecord
         location_x: 1,
         location_y: 1,
         image: "/assets/images/pieces/whiterook.svg",
-        status: "uncaptured"
+        status: "uncaptured",
+        move_count: 0
       )
       Piece::Rook.create(
         game_id: self.id,
@@ -39,7 +41,8 @@ class Game < ApplicationRecord
         location_x: 8,
         location_y: 1,
         image: "/assets/images/pieces/whiterook.svg",
-        status: "uncaptured"
+        status: "uncaptured",
+        move_count: 0
       )
 
     # knights
@@ -49,7 +52,8 @@ class Game < ApplicationRecord
         location_x: 2,
         location_y: 1,
         image: "/assets/images/pieces/whiteknight.svg",
-        status: "uncaptured"
+        status: "uncaptured",
+        move_count: 0
       )
       Piece::Knight.create(
         game_id: self.id,
@@ -57,7 +61,8 @@ class Game < ApplicationRecord
         location_x: 7,
         location_y: 1,
         image: "/assets/images/pieces/whiteknight.svg",
-        status: "uncaptured"
+        status: "uncaptured",
+        move_count: 0
       )
 
     # bishops
@@ -67,7 +72,8 @@ class Game < ApplicationRecord
         location_x: 3,
         location_y: 1,
         image: "/assets/images/pieces/whitebishop.svg",
-        status: "uncaptured"
+        status: "uncaptured",
+        move_count: 0
       )
       Piece::Bishop.create(
         game_id: self.id,
@@ -75,7 +81,8 @@ class Game < ApplicationRecord
         location_x: 6,
         location_y: 1,
         image: "/assets/images/pieces/whitebishop.svg",
-        status: "uncaptured"
+        status: "uncaptured",
+        move_count: 0
       )
 
     # king
@@ -85,7 +92,8 @@ class Game < ApplicationRecord
         location_x: 5,
         location_y: 1,
         image: "/assets/images/pieces/whiteking.svg",
-        status: "uncaptured"
+        status: "uncaptured",
+        move_count: 0
       )
 
     # queen
@@ -95,7 +103,8 @@ class Game < ApplicationRecord
         location_x: 4,
         location_y: 1,
         image: "/assets/images/pieces/whitequeen.svg",
-        status: "uncaptured"
+        status: "uncaptured",
+        move_count: 0
       )
 
   # black pieces
@@ -106,7 +115,8 @@ class Game < ApplicationRecord
           location_x: x,
           location_y: 7,
           image: "/assets/images/pieces/blackpawn.svg",
-          status: "uncaptured"
+          status: "uncaptured",
+          move_count: 0
         )
       end
 
@@ -116,14 +126,16 @@ class Game < ApplicationRecord
         location_x: 1,
         location_y: 8,
         image: "/assets/images/pieces/blackrook.svg",
-        status: "uncaptured"
+        status: "uncaptured",
+        move_count: 0
       )
       Piece::Rook.create(
         game_id: self.id,
         location_x: 8,
         location_y: 8,
         image: "/assets/images/pieces/blackrook.svg",
-        status: "uncaptured"
+        status: "uncaptured",
+        move_count: 0
       )
 
     # knights
@@ -132,14 +144,16 @@ class Game < ApplicationRecord
         location_x: 2,
         location_y: 8,
         image: "/assets/images/pieces/blackknight.svg",
-        status: "uncaptured"
+        status: "uncaptured",
+        move_count: 0
       )
       Piece::Knight.create(
         game_id: self.id,
         location_x: 7,
         location_y: 8,
         image: "/assets/images/pieces/blackknight.svg",
-        status: "uncaptured"
+        status: "uncaptured",
+        move_count: 0
       )
 
     # bishops
@@ -148,14 +162,16 @@ class Game < ApplicationRecord
         location_x: 3,
         location_y: 8,
         image: "/assets/images/pieces/blackbishop.svg",
-        status: "uncaptured"
+        status: "uncaptured",
+        move_count: 0
       )
       Piece::Bishop.create(
         game_id: self.id,
         location_x: 6,
         location_y: 8,
         image: "/assets/images/pieces/blackbishop.svg",
-        status: "uncaptured"
+        status: "uncaptured",
+        move_count: 0
       )
 
     # king
@@ -164,7 +180,8 @@ class Game < ApplicationRecord
         location_x: 5,
         location_y: 8,
         image: "/assets/images/pieces/blackking.svg",
-        status: "uncaptured"
+        status: "uncaptured",
+        move_count: 0
       )
 
     # queen
@@ -173,7 +190,8 @@ class Game < ApplicationRecord
         location_x: 4,
         location_y: 8,
         image: "/assets/images/pieces/blackqueen.svg",
-        status: "uncaptured"
+        status: "uncaptured",
+        move_count: 0
       )
   end
 end

@@ -86,7 +86,7 @@ class Piece < ApplicationRecord
   end
 
   def update_piece_location!(new_x, new_y)
-    self.update_attributes({location_x: new_x, location_y: new_y})
+    self.update_attributes({location_x: new_x, location_y: new_y, move_count: (move_count + 1)})
   end
 
 
@@ -99,5 +99,20 @@ class Piece < ApplicationRecord
       piece_at_destination.capture_piece!
     end  
     update_piece_location!(new_x, new_y)
+  end
+  
+  def self.en_passant(location_x, location_y, destination_x, destination_y, game)
+    if (game.user_id == game.white_player_id) && (Piece.is_occupied(destination_x, destination_y - 1, game)) == true
+      piececheck = game.pieces.find_by(location_x: destination_x, location_y: destination_y - 1)
+    elsif (game.user_id == game.black_player_id) && (Piece.is_occupied(destination_x, destination_y + 1, game)) == true
+      piececheck = game.pieces.find_by(location_x: destination_x, location_y: destination_y + 1)
+    else
+      return false
+    end
+      if piececheck.move_count == 1
+        return true
+      else
+        return false
+      end
   end
 end

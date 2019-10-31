@@ -119,6 +119,8 @@ RSpec.describe Piece, type: :model do
       expect(Piece::Pawn.valid_move?(3, 6, 3, 5, game2)).to eq true
       piece = FactoryBot.create(:piece, id: 1, location_x: 4, location_y: 4, game_id: game.id, player_id: game.user_id)
       expect(Piece::Pawn.valid_move?(3, 3, 4, 4, game)).to eq true
+      piece = FactoryBot.create(:piece, id: 2, location_x: 3, location_y: 4, game_id: game2.id, player_id: game.user_id, move_count: 1)
+      expect(Piece::Pawn.valid_move?(4, 4, 3, 3, game2)).to eq true
     end
     it "should return false if the move for the pawn is invalid" do
       user = FactoryBot.create(:user)

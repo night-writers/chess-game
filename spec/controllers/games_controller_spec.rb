@@ -70,11 +70,12 @@ RSpec.describe GamesController, type: :controller do
     it 'should update the piece location' do
       user = FactoryBot.create(:user)
       game = FactoryBot.create(:game)
-      piece = FactoryBot.create(:piece, id: 1, location_x: 1, location_y: 2, game_id: game.id, player_id: game.user_id)
+      piece = FactoryBot.create(:piece, id: 1, location_x: 1, location_y: 2, game_id: game.id, player_id: game.user_id, move_count: 0)
       piece.update_piece_location!(2, 4)
 
       expect(piece.location_x).to eq(2)
       expect(piece.location_y).to eq(4)
+      expect(piece.move_count).to eq(1)
     end
   end
   
