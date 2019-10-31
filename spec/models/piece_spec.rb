@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe Piece, type: :model do
 # Temporary tests until functionality for adding pieces to a game is added.
-  it "should return true if there is a horizontal obstruction" do
+    it "should return true if there is a horizontal obstruction" do
       user = FactoryBot.create(:user)
       game = FactoryBot.create(:game)
       piece = FactoryBot.create(:piece, id: 1, location_x: 2, location_y: 2, game_id: game.id, player_id: game.user_id)
