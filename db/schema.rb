@@ -34,11 +34,6 @@ ActiveRecord::Schema.define(version: 2019_10_30_210757) do
     t.index ["user_id"], name: "index_games_on_user_id"
   end
 
-  create_table "piece_pawns", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "pieces", force: :cascade do |t|
     t.integer "location_x"
     t.integer "location_y"
