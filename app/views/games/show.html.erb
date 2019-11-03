@@ -142,3 +142,5 @@
 <%= @game.white_player_id %>
 
 <%= link_to "Join Game", game_path(@game), :method => :put, class: "nav-link" %>
+<br />
+<%= link_to 'Concede', game_path, method: :delete, data: {confirm: 'Are you sure you want forfeit this game?'} %>

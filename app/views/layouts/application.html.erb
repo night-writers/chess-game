@@ -18,11 +18,6 @@
                 <%= link_to "New Game", new_game_path, class: "nav-link" %>
               </li>
               <li class="nav-item">
-<% if false %>
-              <% if current_user && @game != nil %>
-                <%= link_to 'Concede', game_path(@game), method: :delete, data: {confirm: 'Are you sure you want forfeit this game?'} %>
-<% end %>
-              <% end %>
               </li>
           </ul>
       </div>

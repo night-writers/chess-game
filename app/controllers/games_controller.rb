@@ -1,6 +1,6 @@
 class GamesController < ApplicationController
   def show
-    @game = Game.find(params[:id])
+    @game = Game.find_by_id(params[:id])
     if @game.blank?
       render_not_found
     end
@@ -36,7 +36,7 @@ class GamesController < ApplicationController
     return render_not_found if @game.blank?
     @game.update_attribute(:status, "complete")
     @game.destroy
-    redirect_back(fallback_location: root_path, alert: 'Player has forfeited, game over!')
+      redirect_to root_path
   end
 
   private
