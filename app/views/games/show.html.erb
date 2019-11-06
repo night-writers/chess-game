@@ -1,4 +1,11 @@
 <script>
+$(function() {
+    $('.piece').draggable();
+});
+</script>
+
+<% if @game.turn == current_user.id %>
+<script>
   $(function() {
     function convertLocation(x) {
       var new_x = "";
@@ -30,7 +37,6 @@
       }
       return new_x;
     }
-    $('.piece').draggable();
     $('.white').droppable({
       drop: function( event, ui ) {
         var updateURL = $(ui.draggable).attr("data-piece-update-url");
@@ -61,8 +67,18 @@
         });
       }
     });
-  });
+});
+
 </script>
+<% if @game.turn == @game.white_player_id %>
+  <% if @game.black_player_id %>
+    <% @game.update_attributes({turn: @game.black_player_id}) %>
+  <% end %>
+<% elsif @game.turn == @game.black_player_id %>
+  <% @game.update_attributes({turn: @game.white_player_id}) %>
+<% end %>
+<% end %>
+
 <div class="chessboard">
   <!-- 1st -->
   <div id="a8" class="white"><% if piece_at(1,8) %><%= image_tag piece_at(1,8), class: 'piece', data: { piece_update_url: games_piece_path(get_id(1,8)), current_x: 1, current_y: 8 } %><% end %></div>
