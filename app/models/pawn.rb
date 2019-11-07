@@ -27,7 +27,7 @@ class Pawn < Piece
       end
     end
   # Allow the pawn to move diagonally only to capture a piece
-    if (location_x != destination_x) && (location_y != destination_y) && (is_occupied(destination_x, destination_y, game) == false)
+    if (location_x != destination_x) && (location_y != destination_y) && (game.pieces.where(destination_x, destination_y).present? == false)
       return false
     end
   # Allow the pawn to move two spaces if it's in the starting position, otherwise only allow the pawn to move one space.
