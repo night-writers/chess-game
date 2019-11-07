@@ -1,6 +1,6 @@
-class Piece::Rook < Piece
+class Rook < Piece
 # The rook can move horizontally or vertically (but not diagonally) any number of spaces as long as it isn't obstructed.
-  def self.valid_move?(location_x, location_y, destination_x, destination_y, game)
+  def valid_move?(location_x, location_y, destination_x, destination_y, game)
     if is_obstructed?(location_x, location_y, destination_x, destination_y, game)
       return false
     elsif 

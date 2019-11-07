@@ -1,5 +1,5 @@
-class Piece::Pawn < Piece
-  def self.valid_move?(location_x, location_y, destination_x, destination_y, game)
+class Pawn < Piece
+  def valid_move?(location_x, location_y, destination_x, destination_y, game)
   # Check to see if the piece is obstructed.
     if is_obstructed?(location_x, location_y, destination_x, destination_y, game)
       return false
