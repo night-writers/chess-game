@@ -8,6 +8,7 @@ class Game < ApplicationRecord
   def init
     self.status ||= "available"
     self.white_player_id ||= self.user_id
+    self.turn ||= self.user_id
   end
 
   def check?
