@@ -77,11 +77,14 @@ class Piece < ApplicationRecord
   
   # Checks if there is a piece at the specified location.
   def is_occupied(x, y, game)
-    game.pieces.where(location_x: x, location_y: y).present?
+    if game.pieces.where(location_x: x, location_y: y).present?
+      return true
+    end
+    return false
   end
   
  # Capture method, update piece method, move_to! method
- def capture_piece!
+  def capture_piece!
     update_attributes({location_x: nil, location_y: nil, status: "captured"})
   end
 
