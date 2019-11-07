@@ -64,8 +64,8 @@ ActiveRecord::Schema.define(version: 2019_10_31_003551) do
     t.datetime "remember_created_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "wins"
-    t.integer "losses"
+    t.integer "wins", default: 0
+    t.integer "losses", default: 0
     t.integer "active_games", array: true
     t.string "provider"
     t.string "uid"

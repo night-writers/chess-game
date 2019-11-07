@@ -2,9 +2,11 @@ class GamesController < ApplicationController
   def show
     @game = Game.find_by_id(params[:id])
     if @game.blank?
-      render_not_found
+      redirect_to root_path
+    else
+      @pieces = @game.pieces
     end
-    @pieces = @game.pieces
+
   end
 
   def new
@@ -33,8 +35,17 @@ class GamesController < ApplicationController
 
   def destroy
     @game = Game.find(params[:id])
-    return render_not_found if @game.blank?
+    return redirect_to root_path if @game.blank?
     @game.update_attribute(:status, "complete")
+    loser = current_user
+    loser.increment!(:losses)
+      if @game.white_player_id == current_user.id
+      winner = User.find(@game.black_player_id)
+      winner.increment!(:wins)
+      else
+      winner = User.find(@game.white_player_id)
+      winner.increment!(:wins)
+      end
     @game.destroy
       redirect_to root_path
   end
