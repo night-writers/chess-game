@@ -1,4 +1,10 @@
 class Pawn < Piece
+  # def is_obstructed?(location_x, location_y, destination_x, destination_y, game)
+  #   super
+  # end
+  def is_occupied?(destination_x, destination_y, game)
+    super
+  end
   def valid_move?(location_x, location_y, destination_x, destination_y, game)
   # Check to see if the piece is obstructed.
     if is_obstructed?(location_x, location_y, destination_x, destination_y, game)
@@ -15,7 +21,7 @@ class Pawn < Piece
       end
     end
   # Check to make sure the destination isn't the same as the location, the piece isn't moving horizontally, and the space the piece is moving to isn't occupied. 
-    if (location_x == destination_x && location_y == destination_y) || (location_x != destination_x && location_y == destination_y) || (location_x == destination_x && is_occupied(destination_x, destination_y, game) == true)
+    if (location_x == destination_x && location_y == destination_y) || (location_x != destination_x && location_y == destination_y) || (location_x == destination_x && is_occupied?(destination_x, destination_y, game) == true)
       return false
     end
   # Check to see if it is possible to perform an en passant capture.
