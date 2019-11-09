@@ -1,10 +1,4 @@
 class Pawn < Piece
-  # def is_obstructed?(location_x, location_y, destination_x, destination_y, game)
-  #   super
-  # end
-  def is_occupied?(destination_x, destination_y, game)
-    super
-  end
   def valid_move?(location_x, location_y, destination_x, destination_y, game)
   # Check to see if the piece is obstructed.
     if is_obstructed?(location_x, location_y, destination_x, destination_y, game)
