@@ -5,23 +5,24 @@ class Games::PiecesController < ApplicationController
   end
 
   def update
-    @piece = Piece.find_by_id(params[:id])
+    @piece = Piece.find(params[:id])
     return render_not_found if @piece.blank?
+    @piece.update_attributes(piece_params)
     # call the move_to logic
-    if @piece.valid_move?(params[:location_x], params[:location_y], params[:destination_x], params[:destination_y]) == true
-      if @piece.game.check?
-        flash[:notice] = "Check!"
-      end
-      @piece.move_to!(params[:location_x], params[:location_y])
-      @piece.update_attributes(piece_params)
-      redirect_to game_path(@piece.game)
+    if @piece.valid_move?(@piece.location_x, @piece.location_y, @piece.new_x, @piece.new_y, @piece.game)
+      # if @piece.game.check?
+      #   flash[:notice] = "Check!"
+      # end
+      @piece.move_to!(@piece.new_x, @piece.new_y)
+    
+      # redirect_to game_path(@piece.game)
     end
-    render plain: 'updated!'
+    # render plain: 'updated!'
   end
 
   private
   
   def piece_params
-    params.require(:piece).permit(:location_x, :location_y)
+    params.require(:piece).permit(:new_x, :new_y)
   end
 end

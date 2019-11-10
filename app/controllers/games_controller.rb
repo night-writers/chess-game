@@ -1,4 +1,5 @@
 class GamesController < ApplicationController
+  before_action :authenticate_user!
   def show
     @game = Game.find_by_id(params[:id])
     if @game.blank?
@@ -8,11 +9,7 @@ class GamesController < ApplicationController
   end
 
   def new
-    if current_user 
-      @game = Game.new
-    else
-      redirect_to new_user_session_path
-    end
+    @game = Game.new
   end
 
   def create

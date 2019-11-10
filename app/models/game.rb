@@ -12,10 +12,10 @@ class Game < ApplicationRecord
   end
 
   def check?
-    black_king = self.pieces.where(name: "blackking")
-    white_king = self.pieces.where(name: "whiteking")
+    black_king = pieces.where(name: "blackking")
+    white_king = pieces.where(name: "whiteking")
 
-    self.pieces.each do |piece|
+    pieces.each do |piece|
       if piece.valid_move?(piece.location_x, piece.location_y, black_king.location_x, black_king.location_y) && (piece.player_id != piece.game.black_player_id)
         return true
       end
@@ -30,7 +30,8 @@ class Game < ApplicationRecord
   # white pieces
     # pawns
     for x in 1..8 do
-      Piece::Pawn.create(
+      Piece.create(
+        type: Pawn,
         game_id: self.id,
         player_id: self.user_id,
         location_x: x,
@@ -43,7 +44,8 @@ class Game < ApplicationRecord
     end
 
     # rooks
-      Piece::Rook.create(
+      Piece.create(
+        type: Rook,
         game_id: self.id,
         player_id: self.user_id,
         location_x: 1,
@@ -53,7 +55,8 @@ class Game < ApplicationRecord
         status: "uncaptured",
         move_count: 0
       )
-      Piece::Rook.create(
+      Piece.create(
+        type: Rook,
         game_id: self.id,
         player_id: self.user_id,
         location_x: 8,
@@ -65,7 +68,8 @@ class Game < ApplicationRecord
       )
 
     # knights
-      Piece::Knight.create(
+      Piece.create(
+        type: Knight,
         game_id: self.id,
         player_id: self.user_id,
         location_x: 2,
@@ -75,7 +79,8 @@ class Game < ApplicationRecord
         status: "uncaptured",
         move_count: 0
       )
-      Piece::Knight.create(
+      Piece.create(
+        type: Knight,
         game_id: self.id,
         player_id: self.user_id,
         location_x: 7,
@@ -87,7 +92,8 @@ class Game < ApplicationRecord
       )
 
     # bishops
-      Piece::Bishop.create(
+      Piece.create(
+        type: Bishop,
         game_id: self.id,
         player_id: self.user_id,
         location_x: 3,
@@ -97,7 +103,8 @@ class Game < ApplicationRecord
         status: "uncaptured",
         move_count: 0
       )
-      Piece::Bishop.create(
+      Piece.create(
+        type: Bishop,
         game_id: self.id,
         player_id: self.user_id,
         location_x: 6,
@@ -109,7 +116,8 @@ class Game < ApplicationRecord
       )
 
     # king
-      Piece::King.create(
+      Piece.create(
+        type: King,
         game_id: self.id,
         player_id: self.user_id,
         location_x: 5,
@@ -121,7 +129,8 @@ class Game < ApplicationRecord
       )
 
     # queen
-      Piece::Queen.create(
+      Piece.create(
+        type: Queen,
         game_id: self.id,
         player_id: self.user_id,
         location_x: 4,
@@ -135,7 +144,8 @@ class Game < ApplicationRecord
   # black pieces
     # pawns
       for x in 1..8 do
-        Piece::Pawn.create(
+        Piece.create(
+          type: Pawn,
           game_id: self.id,
           location_x: x,
           location_y: 7,
@@ -147,7 +157,8 @@ class Game < ApplicationRecord
       end
 
     # rooks
-      Piece::Rook.create(
+      Piece.create(
+        type: Rook,
         game_id: self.id,
         location_x: 1,
         location_y: 8,
@@ -156,7 +167,8 @@ class Game < ApplicationRecord
         status: "uncaptured",
         move_count: 0
       )
-      Piece::Rook.create(
+      Piece.create(
+        type: Rook,
         game_id: self.id,
         location_x: 8,
         location_y: 8,
@@ -167,7 +179,8 @@ class Game < ApplicationRecord
       )
 
     # knights
-      Piece::Knight.create(
+      Piece.create(
+        type: Knight,
         game_id: self.id,
         location_x: 2,
         location_y: 8,
@@ -176,7 +189,8 @@ class Game < ApplicationRecord
         status: "uncaptured",
         move_count: 0
       )
-      Piece::Knight.create(
+      Piece.create(
+        type: Knight,
         game_id: self.id,
         location_x: 7,
         location_y: 8,
@@ -187,7 +201,8 @@ class Game < ApplicationRecord
       )
 
     # bishops
-      Piece::Bishop.create(
+      Piece.create(
+        type: Bishop,
         game_id: self.id,
         location_x: 3,
         location_y: 8,
@@ -196,7 +211,8 @@ class Game < ApplicationRecord
         status: "uncaptured",
         move_count: 0
       )
-      Piece::Bishop.create(
+      Piece.create(
+        type: Bishop,
         game_id: self.id,
         location_x: 6,
         location_y: 8,
@@ -207,7 +223,8 @@ class Game < ApplicationRecord
       )
 
     # king
-      Piece::King.create(
+      Piece.create(
+        type: King,
         game_id: self.id,
         location_x: 5,
         location_y: 8,
@@ -218,7 +235,8 @@ class Game < ApplicationRecord
       )
 
     # queen
-      Piece::Queen.create(
+      Piece.create(
+        type: Queen,
         game_id: self.id,
         location_x: 4,
         location_y: 8,

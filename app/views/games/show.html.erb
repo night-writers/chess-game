@@ -48,7 +48,7 @@ $(function() {
           type: 'PUT',
           url: updateURL,
           dataType: 'json',
-          data: { piece: { location_x: new_x, location_y: new_y/*, destination_x: new_x, destination_y: new_y*/ }}
+          data: { piece: { new_x: new_x, new_y: new_y/*, destination_x: new_x, destination_y: new_y*/ }}
         });
       }
     });
@@ -62,7 +62,7 @@ $(function() {
           type: 'PUT',
           url: updateURL,
           dataType: 'json',
-          data: { piece: { location_x: new_x, location_y: new_y }}
+          data: { piece: { new_x: new_x, new_y: new_y }}
         });
       }
     });
