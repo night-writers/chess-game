@@ -12,10 +12,10 @@ class Game < ApplicationRecord
   end
 
   def check?
-    black_king = self.pieces.where(name: "blackking")
-    white_king = self.pieces.where(name: "whiteking")
+    black_king = pieces.where(name: "blackking")
+    white_king = pieces.where(name: "whiteking")
 
-    self.pieces.each do |piece|
+    pieces.each do |piece|
       if piece.valid_move?(piece.location_x, piece.location_y, black_king.location_x, black_king.location_y) && (piece.player_id != piece.game.black_player_id)
         return true
       end
