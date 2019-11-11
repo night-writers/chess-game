@@ -68,7 +68,7 @@ class Piece < ApplicationRecord
       is_obstructed_horizontal?(destination_x, location_x, location_y, game)
     elsif location_x == destination_x
       is_obstructed_vertical?(destination_y, location_y, location_x, game)
-    elsif  (destination_x - location_x) != (destination_y - location_y)
+    elsif  (destination_x - location_x).abs != (destination_y - location_y).abs
       return "invalid input.  Not diagnal, horizontal, or vertical."
     else location_x != destination_x && location_y != destination_y
       is_obstructed_diagonal?(destination_x, destination_y, location_x, location_y, game)
