@@ -5,6 +5,8 @@ FactoryBot.define do
     end
     password { "secretPassword" }
     password_confirmation { "secretPassword" }
+    losses {0}
+    wins {0}
   end
 
   factory :game do
