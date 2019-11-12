@@ -50,11 +50,9 @@ $(function() {
           data: { piece: { new_x: new_x, new_y: new_y/*, destination_x: new_x, destination_y: new_y*/ }},
           success: function(data){
             /*ajax request successful*/
-            console.log("ajax success");
           },
           complete: function(data){
             /*ajax request complete*/
-            console.log("ajax complete");
             if (pieceSrc.substring(22) == "whitepawn.svg" && new_y == 8){
               /*Verified that piece is a pawn. Since piece is white, verified that it has reached TOP of board  with new_y value.*/
               var promotionModal = $('#proModal');
