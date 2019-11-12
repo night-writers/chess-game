@@ -39,16 +39,39 @@ $(function() {
     $('.white').droppable({
       drop: function( event, ui ) {
         var updateURL = $(ui.draggable).attr("data-piece-update-url");
-        /*var current_x = $(ui.draggable).attr("data-current-x");
-        var current_y = $(ui.draggable).attr("data-current-y");*/
         var myID = this.getAttribute("id");
         var new_x = convertLocation(myID.substring(0,1));
         var new_y = myID.substring(1,2);
+        var pieceSrc = $(ui.draggable).attr("src");
         $.ajax({
           type: 'PUT',
           url: updateURL,
           dataType: 'json',
-          data: { piece: { new_x: new_x, new_y: new_y/*, destination_x: new_x, destination_y: new_y*/ }}
+          data: { piece: { new_x: new_x, new_y: new_y/*, destination_x: new_x, destination_y: new_y*/ }},
+          success: function(data){
+            /*ajax request successful*/
+            console.log("ajax success");
+          },
+          complete: function(data){
+            /*ajax request complete*/
+            console.log("ajax complete");
+            if (pieceSrc.substring(22) == "whitepawn.svg" && new_y == 8){
+              /*Verified that piece is a pawn. Since piece is white, verified that it has reached TOP of board  with new_y value.*/
+              var promotionModal = $('#proModal');
+              promotionModal.data("piece-id",ui.draggable.attr("data-piece-id"));
+              promotionModal.data("update-url",ui.draggable.attr("data-piece-update-url"));
+              promotionModal.data("piece-color","white");
+              promotionModal.modal('show');
+            }
+            else if (pieceSrc.substring(22) == "blackpawn.svg" && new_y == 1){
+              /*Verified that piece is a pawn. Since piece is black, verified that it has reached BOTTOM of board  with new_y value.*/
+              var promotionModal = $('#proModal');
+              promotionModal.data("piece-id",ui.draggable.attr("data-piece-id"));
+              promotionModal.data("update-url",ui.draggable.attr("data-piece-update-url"));
+              promotionModal.data("piece-color","black");
+              promotionModal.modal('show');
+            }
+          }
         });
       }
     });
@@ -58,14 +81,145 @@ $(function() {
         var myID = this.getAttribute("id");
         var new_x = convertLocation(myID.substring(0,1));
         var new_y = myID.substring(1,2);
+        var pieceSrc = $(ui.draggable).attr("src");
         $.ajax({
           type: 'PUT',
           url: updateURL,
           dataType: 'json',
-          data: { piece: { new_x: new_x, new_y: new_y }}
+          data: { piece: { new_x: new_x, new_y: new_y }},
+          success: function(data){
+            /*ajax request successful*/
+          },
+          complete: function(data){
+            /*ajax request complete*/
+            if (pieceSrc.substring(22) == "whitepawn.svg" && new_y == 8){
+              /*Verified that piece is a pawn. Since piece is white, verified that it has reached TOP of board  with new_y value.*/
+              var promotionModal = $('#proModal');
+              promotionModal.data("piece-id",ui.draggable.attr("data-piece-id"));
+              promotionModal.data("update-url",ui.draggable.attr("data-piece-update-url"));
+              promotionModal.data("piece-color","white");
+              promotionModal.modal('show');
+            }
+            else if (pieceSrc.substring(22) == "blackpawn.svg" && new_y == 1){
+              /*Verified that piece is a pawn. Since piece is black, verified that it has reached BOTTOM of board  with new_y value.*/
+              var promotionModal = $('#proModal');
+              promotionModal.data("piece-id",ui.draggable.attr("data-piece-id"));
+              promotionModal.data("update-url",ui.draggable.attr("data-piece-update-url"));
+              promotionModal.data("piece-color","black");
+              promotionModal.modal('show');
+            }
+          }
         });
       }
     });
+    $('#queenPromotion').click(
+      function() {
+        var url = $('#proModal').data("update-url");
+        var pieceColor = $('#proModal').data("piece-color");
+        var pieceName = pieceColor + "queen";
+        var pieceImage = "";
+        if (pieceColor=="white") {
+          pieceImage = "/assets/images/pieces/whitequeen.svg"
+        }
+        else if (pieceColor=="black") {
+          pieceImage = "/assets/images/pieces/blackqueen.svg"
+        }
+        $.ajax({
+          type: 'PUT',
+          url: url,
+          dataType: 'json',
+          data: { piece: { type: "Queen", image: pieceImage, name: pieceName }},
+          success: function(data){
+            /*ajax request successful*/
+          },
+          complete: function(data){
+            /*ajax request successful*/
+          }
+        });
+        location.reload(true);
+      }
+    );
+    $('#knightPromotion').click(
+      function() {
+        var url = $('#proModal').data("update-url");
+        var pieceColor = $('#proModal').data("piece-color");
+        var pieceName = pieceColor + "knight";
+        var pieceImage = "";
+        if (pieceColor=="white") {
+          pieceImage = "/assets/images/pieces/whiteknight.svg"
+        }
+        else if (pieceColor=="black") {
+          pieceImage = "/assets/images/pieces/blackknight.svg"
+        }
+        $.ajax({
+          type: 'PUT',
+          url: url,
+          dataType: 'json',
+          data: { piece: { type: "Knight", image: pieceImage, name: pieceName }},
+          success: function(data){
+            /*ajax request successful*/
+          },
+          complete: function(data){
+            /*ajax request successful*/
+          }
+        });
+        location.reload(true);
+      }
+    );
+    $('#rookPromotion').click(
+      function() {
+        var url = $('#proModal').data("update-url");
+        var pieceColor = $('#proModal').data("piece-color");
+        var pieceName = pieceColor + "rook";
+        var pieceImage = "";
+        if (pieceColor=="white") {
+          pieceImage = "/assets/images/pieces/whiterook.svg"
+        }
+        else if (pieceColor=="black") {
+          pieceImage = "/assets/images/pieces/blackrook.svg"
+        }
+        $.ajax({
+          type: 'PUT',
+          url: url,
+          dataType: 'json',
+          data: { piece: { type: "Rook", image: pieceImage, name: pieceName }},
+          success: function(data){
+            /*ajax request successful*/
+          },
+          complete: function(data){
+            /*ajax request successful*/
+          }
+        });
+        location.reload(true);
+      }
+    );
+    $('#rookPromotion').click(
+      function() {
+        var url = $('#proModal').data("update-url");
+        var pieceColor = $('#proModal').data("piece-color");
+        var pieceName = pieceColor + "bishop";
+        var pieceImage = "";
+        if (pieceColor=="white") {
+          pieceImage = "/assets/images/pieces/whitebishop.svg"
+        }
+        else if (pieceColor=="black") {
+          pieceImage = "/assets/images/pieces/blackbishop.svg"
+        }
+        $.ajax({
+          type: 'PUT',
+          url: url,
+          dataType: 'json',
+          data: { piece: { type: "Bishop", image: pieceImage, name: pieceName }},
+          success: function(data){
+            /*ajax request successful*/
+          },
+          complete: function(data){
+            /*ajax request successful*/
+          }
+        });
+        location.reload(true);
+      }
+    );
 });
 
 </script>
@@ -80,77 +234,111 @@ $(function() {
 
 <div class="chessboard">
   <!-- 1st -->
-  <div id="a8" class="white"><% if piece_at(1,8) %><%= image_tag piece_at(1,8), class: 'piece', data: { piece_update_url: games_piece_path(get_id(1,8)), current_x: 1, current_y: 8 } %><% end %></div>
-  <div id="b8" class="black"><% if piece_at(2,8) %><%= image_tag piece_at(2,8), class: 'piece', data: { piece_update_url: games_piece_path(get_id(2,8)), current_x: 2, current_y: 8 } %><% end %></div>
-  <div id="c8" class="white"><% if piece_at(3,8) %><%= image_tag piece_at(3,8), class: 'piece', data: { piece_update_url: games_piece_path(get_id(3,8)), current_x: 3, current_y: 8 } %><% end %></div>
-  <div id="d8" class="black"><% if piece_at(4,8) %><%= image_tag piece_at(4,8), class: 'piece', data: { piece_update_url: games_piece_path(get_id(4,8)), current_x: 4, current_y: 8 } %><% end %></div>
-  <div id="e8" class="white"><% if piece_at(5,8) %><%= image_tag piece_at(5,8), class: 'piece', data: { piece_update_url: games_piece_path(get_id(5,8)), current_x: 5, current_y: 8 } %><% end %></div>
-  <div id="f8" class="black"><% if piece_at(6,8) %><%= image_tag piece_at(6,8), class: 'piece', data: { piece_update_url: games_piece_path(get_id(6,8)), current_x: 6, current_y: 8 } %><% end %></div>
-  <div id="g8" class="white"><% if piece_at(7,8) %><%= image_tag piece_at(7,8), class: 'piece', data: { piece_update_url: games_piece_path(get_id(7,8)), current_x: 7, current_y: 8 } %><% end %></div>
-  <div id="h8" class="black"><% if piece_at(8,8) %><%= image_tag piece_at(8,8), class: 'piece', data: { piece_update_url: games_piece_path(get_id(8,8)), current_x: 8, current_y: 8 } %><% end %></div>
+  <div id="a8" class="white"><% if piece_at(1,8) %><%= image_tag piece_at(1,8), class: 'piece', data: { piece_update_url: games_piece_path(get_id(1,8)), current_x: 1, current_y: 8, piece_id: get_id(1,8) } %><% end %></div>
+  <div id="b8" class="black"><% if piece_at(2,8) %><%= image_tag piece_at(2,8), class: 'piece', data: { piece_update_url: games_piece_path(get_id(2,8)), current_x: 2, current_y: 8, piece_id: get_id(2,8) } %><% end %></div>
+  <div id="c8" class="white"><% if piece_at(3,8) %><%= image_tag piece_at(3,8), class: 'piece', data: { piece_update_url: games_piece_path(get_id(3,8)), current_x: 3, current_y: 8, piece_id: get_id(3,8) } %><% end %></div>
+  <div id="d8" class="black"><% if piece_at(4,8) %><%= image_tag piece_at(4,8), class: 'piece', data: { piece_update_url: games_piece_path(get_id(4,8)), current_x: 4, current_y: 8, piece_id: get_id(4,8) } %><% end %></div>
+  <div id="e8" class="white"><% if piece_at(5,8) %><%= image_tag piece_at(5,8), class: 'piece', data: { piece_update_url: games_piece_path(get_id(5,8)), current_x: 5, current_y: 8, piece_id: get_id(5,8) } %><% end %></div>
+  <div id="f8" class="black"><% if piece_at(6,8) %><%= image_tag piece_at(6,8), class: 'piece', data: { piece_update_url: games_piece_path(get_id(6,8)), current_x: 6, current_y: 8, piece_id: get_id(6,8) } %><% end %></div>
+  <div id="g8" class="white"><% if piece_at(7,8) %><%= image_tag piece_at(7,8), class: 'piece', data: { piece_update_url: games_piece_path(get_id(7,8)), current_x: 7, current_y: 8, piece_id: get_id(7,8) } %><% end %></div>
+  <div id="h8" class="black"><% if piece_at(8,8) %><%= image_tag piece_at(8,8), class: 'piece', data: { piece_update_url: games_piece_path(get_id(8,8)), current_x: 8, current_y: 8, piece_id: get_id(8,8) } %><% end %></div>
   <!-- 2nd -->
-  <div id="a7" class="black"><% if piece_at(1,7) %><%= image_tag piece_at(1,7), class: 'piece', data: { piece_update_url: games_piece_path(get_id(1,7)), current_x: 1, current_y: 7 } %><% end %></div>
-  <div id="b7" class="white"><% if piece_at(2,7) %><%= image_tag piece_at(2,7), class: 'piece', data: { piece_update_url: games_piece_path(get_id(2,7)), current_x: 2, current_y: 7 } %><% end %></div>
-  <div id="c7" class="black"><% if piece_at(3,7) %><%= image_tag piece_at(3,7), class: 'piece', data: { piece_update_url: games_piece_path(get_id(3,7)), current_x: 3, current_y: 7 } %><% end %></div>
-  <div id="d7" class="white"><% if piece_at(4,7) %><%= image_tag piece_at(4,7), class: 'piece', data: { piece_update_url: games_piece_path(get_id(4,7)), current_x: 4, current_y: 7 } %><% end %></div>
-  <div id="e7" class="black"><% if piece_at(5,7) %><%= image_tag piece_at(5,7), class: 'piece', data: { piece_update_url: games_piece_path(get_id(5,7)), current_x: 5, current_y: 7 } %><% end %></div>
-  <div id="f7" class="white"><% if piece_at(6,7) %><%= image_tag piece_at(6,7), class: 'piece', data: { piece_update_url: games_piece_path(get_id(6,7)), current_x: 6, current_y: 7 } %><% end %></div>
-  <div id="g7" class="black"><% if piece_at(7,7) %><%= image_tag piece_at(7,7), class: 'piece', data: { piece_update_url: games_piece_path(get_id(7,7)), current_x: 7, current_y: 7 } %><% end %></div>
-  <div id="h7" class="white"><% if piece_at(8,7) %><%= image_tag piece_at(8,7), class: 'piece', data: { piece_update_url: games_piece_path(get_id(8,7)), current_x: 8, current_y: 7 } %><% end %></div>
+  <div id="a7" class="black"><% if piece_at(1,7) %><%= image_tag piece_at(1,7), class: 'piece', data: { piece_update_url: games_piece_path(get_id(1,7)), current_x: 1, current_y: 7, piece_id: get_id(1,7) } %><% end %></div>
+  <div id="b7" class="white"><% if piece_at(2,7) %><%= image_tag piece_at(2,7), class: 'piece', data: { piece_update_url: games_piece_path(get_id(2,7)), current_x: 2, current_y: 7, piece_id: get_id(2,7) } %><% end %></div>
+  <div id="c7" class="black"><% if piece_at(3,7) %><%= image_tag piece_at(3,7), class: 'piece', data: { piece_update_url: games_piece_path(get_id(3,7)), current_x: 3, current_y: 7, piece_id: get_id(3,7) } %><% end %></div>
+  <div id="d7" class="white"><% if piece_at(4,7) %><%= image_tag piece_at(4,7), class: 'piece', data: { piece_update_url: games_piece_path(get_id(4,7)), current_x: 4, current_y: 7, piece_id: get_id(4,7) } %><% end %></div>
+  <div id="e7" class="black"><% if piece_at(5,7) %><%= image_tag piece_at(5,7), class: 'piece', data: { piece_update_url: games_piece_path(get_id(5,7)), current_x: 5, current_y: 7, piece_id: get_id(5,7) } %><% end %></div>
+  <div id="f7" class="white"><% if piece_at(6,7) %><%= image_tag piece_at(6,7), class: 'piece', data: { piece_update_url: games_piece_path(get_id(6,7)), current_x: 6, current_y: 7, piece_id: get_id(6,7) } %><% end %></div>
+  <div id="g7" class="black"><% if piece_at(7,7) %><%= image_tag piece_at(7,7), class: 'piece', data: { piece_update_url: games_piece_path(get_id(7,7)), current_x: 7, current_y: 7, piece_id: get_id(7,7) } %><% end %></div>
+  <div id="h7" class="white"><% if piece_at(8,7) %><%= image_tag piece_at(8,7), class: 'piece', data: { piece_update_url: games_piece_path(get_id(8,7)), current_x: 8, current_y: 7, piece_id: get_id(8,7) } %><% end %></div>
   <!-- 3rd -->
-  <div id="a6" class="white"><% if piece_at(1,6) %><%= image_tag piece_at(1,6), class: 'piece', data: { piece_update_url: games_piece_path(get_id(1,6)), current_x: 1, current_y: 6 } %><% end %></div>
-  <div id="b6" class="black"><% if piece_at(2,6) %><%= image_tag piece_at(2,6), class: 'piece', data: { piece_update_url: games_piece_path(get_id(2,6)), current_x: 2, current_y: 6 } %><% end %></div>
-  <div id="c6" class="white"><% if piece_at(3,6) %><%= image_tag piece_at(3,6), class: 'piece', data: { piece_update_url: games_piece_path(get_id(3,6)), current_x: 3, current_y: 6 } %><% end %></div>
-  <div id="d6" class="black"><% if piece_at(4,6) %><%= image_tag piece_at(4,6), class: 'piece', data: { piece_update_url: games_piece_path(get_id(4,6)), current_x: 4, current_y: 6 } %><% end %></div>
-  <div id="e6" class="white"><% if piece_at(5,6) %><%= image_tag piece_at(5,6), class: 'piece', data: { piece_update_url: games_piece_path(get_id(5,6)), current_x: 5, current_y: 6 } %><% end %></div>
-  <div id="f6" class="black"><% if piece_at(6,6) %><%= image_tag piece_at(6,6), class: 'piece', data: { piece_update_url: games_piece_path(get_id(6,6)), current_x: 6, current_y: 6 } %><% end %></div>
-  <div id="g6" class="white"><% if piece_at(7,6) %><%= image_tag piece_at(7,6), class: 'piece', data: { piece_update_url: games_piece_path(get_id(7,6)), current_x: 7, current_y: 6 } %><% end %></div>
-  <div id="h6" class="black"><% if piece_at(8,6) %><%= image_tag piece_at(8,6), class: 'piece', data: { piece_update_url: games_piece_path(get_id(8,6)), current_x: 8, current_y: 6 } %><% end %></div>
+  <div id="a6" class="white"><% if piece_at(1,6) %><%= image_tag piece_at(1,6), class: 'piece', data: { piece_update_url: games_piece_path(get_id(1,6)), current_x: 1, current_y: 6, piece_id: get_id(1,6) } %><% end %></div>
+  <div id="b6" class="black"><% if piece_at(2,6) %><%= image_tag piece_at(2,6), class: 'piece', data: { piece_update_url: games_piece_path(get_id(2,6)), current_x: 2, current_y: 6, piece_id: get_id(2,6) } %><% end %></div>
+  <div id="c6" class="white"><% if piece_at(3,6) %><%= image_tag piece_at(3,6), class: 'piece', data: { piece_update_url: games_piece_path(get_id(3,6)), current_x: 3, current_y: 6, piece_id: get_id(3,6) } %><% end %></div>
+  <div id="d6" class="black"><% if piece_at(4,6) %><%= image_tag piece_at(4,6), class: 'piece', data: { piece_update_url: games_piece_path(get_id(4,6)), current_x: 4, current_y: 6, piece_id: get_id(4,6) } %><% end %></div>
+  <div id="e6" class="white"><% if piece_at(5,6) %><%= image_tag piece_at(5,6), class: 'piece', data: { piece_update_url: games_piece_path(get_id(5,6)), current_x: 5, current_y: 6, piece_id: get_id(5,6) } %><% end %></div>
+  <div id="f6" class="black"><% if piece_at(6,6) %><%= image_tag piece_at(6,6), class: 'piece', data: { piece_update_url: games_piece_path(get_id(6,6)), current_x: 6, current_y: 6, piece_id: get_id(6,6) } %><% end %></div>
+  <div id="g6" class="white"><% if piece_at(7,6) %><%= image_tag piece_at(7,6), class: 'piece', data: { piece_update_url: games_piece_path(get_id(7,6)), current_x: 7, current_y: 6, piece_id: get_id(7,6) } %><% end %></div>
+  <div id="h6" class="black"><% if piece_at(8,6) %><%= image_tag piece_at(8,6), class: 'piece', data: { piece_update_url: games_piece_path(get_id(8,6)), current_x: 8, current_y: 6, piece_id: get_id(8,6) } %><% end %></div>
   <!-- 4th -->
-  <div id="a5" class="black"><% if piece_at(1,5) %><%= image_tag piece_at(1,5), class: 'piece', data: { piece_update_url: games_piece_path(get_id(1,5)), current_x: 1, current_y: 5 } %><% end %></div>
-  <div id="b5" class="white"><% if piece_at(2,5) %><%= image_tag piece_at(2,5), class: 'piece', data: { piece_update_url: games_piece_path(get_id(2,5)), current_x: 2, current_y: 5 } %><% end %></div>
-  <div id="c5" class="black"><% if piece_at(3,5) %><%= image_tag piece_at(3,5), class: 'piece', data: { piece_update_url: games_piece_path(get_id(3,5)), current_x: 3, current_y: 5 } %><% end %></div>
-  <div id="d5" class="white"><% if piece_at(4,5) %><%= image_tag piece_at(4,5), class: 'piece', data: { piece_update_url: games_piece_path(get_id(4,5)), current_x: 4, current_y: 5 } %><% end %></div>
-  <div id="e5" class="black"><% if piece_at(5,5) %><%= image_tag piece_at(5,5), class: 'piece', data: { piece_update_url: games_piece_path(get_id(5,5)), current_x: 5, current_y: 5 } %><% end %></div>
-  <div id="f5" class="white"><% if piece_at(6,5) %><%= image_tag piece_at(6,5), class: 'piece', data: { piece_update_url: games_piece_path(get_id(6,5)), current_x: 6, current_y: 5 } %><% end %></div>
-  <div id="g5" class="black"><% if piece_at(7,5) %><%= image_tag piece_at(7,5), class: 'piece', data: { piece_update_url: games_piece_path(get_id(7,5)), current_x: 7, current_y: 5 } %><% end %></div>
-  <div id="h5" class="white"><% if piece_at(8,5) %><%= image_tag piece_at(8,5), class: 'piece', data: { piece_update_url: games_piece_path(get_id(8,5)), current_x: 8, current_y: 5 } %><% end %></div>
+  <div id="a5" class="black"><% if piece_at(1,5) %><%= image_tag piece_at(1,5), class: 'piece', data: { piece_update_url: games_piece_path(get_id(1,5)), current_x: 1, current_y: 5, piece_id: get_id(1,5) } %><% end %></div>
+  <div id="b5" class="white"><% if piece_at(2,5) %><%= image_tag piece_at(2,5), class: 'piece', data: { piece_update_url: games_piece_path(get_id(2,5)), current_x: 2, current_y: 5, piece_id: get_id(2,5) } %><% end %></div>
+  <div id="c5" class="black"><% if piece_at(3,5) %><%= image_tag piece_at(3,5), class: 'piece', data: { piece_update_url: games_piece_path(get_id(3,5)), current_x: 3, current_y: 5, piece_id: get_id(3,5) } %><% end %></div>
+  <div id="d5" class="white"><% if piece_at(4,5) %><%= image_tag piece_at(4,5), class: 'piece', data: { piece_update_url: games_piece_path(get_id(4,5)), current_x: 4, current_y: 5, piece_id: get_id(4,5) } %><% end %></div>
+  <div id="e5" class="black"><% if piece_at(5,5) %><%= image_tag piece_at(5,5), class: 'piece', data: { piece_update_url: games_piece_path(get_id(5,5)), current_x: 5, current_y: 5, piece_id: get_id(5,5) } %><% end %></div>
+  <div id="f5" class="white"><% if piece_at(6,5) %><%= image_tag piece_at(6,5), class: 'piece', data: { piece_update_url: games_piece_path(get_id(6,5)), current_x: 6, current_y: 5, piece_id: get_id(6,5) } %><% end %></div>
+  <div id="g5" class="black"><% if piece_at(7,5) %><%= image_tag piece_at(7,5), class: 'piece', data: { piece_update_url: games_piece_path(get_id(7,5)), current_x: 7, current_y: 5, piece_id: get_id(7,5) } %><% end %></div>
+  <div id="h5" class="white"><% if piece_at(8,5) %><%= image_tag piece_at(8,5), class: 'piece', data: { piece_update_url: games_piece_path(get_id(8,5)), current_x: 8, current_y: 5, piece_id: get_id(8,5) } %><% end %></div>
   <!-- 5th -->
-  <div id="a4" class="white"><% if piece_at(1,4) %><%= image_tag piece_at(1,4), class: 'piece', data: { piece_update_url: games_piece_path(get_id(1,4)), current_x: 1, current_y: 4 } %><% end %></div>
-  <div id="b4" class="black"><% if piece_at(2,4) %><%= image_tag piece_at(2,4), class: 'piece', data: { piece_update_url: games_piece_path(get_id(2,4)), current_x: 2, current_y: 4 } %><% end %></div>
-  <div id="c4" class="white"><% if piece_at(3,4) %><%= image_tag piece_at(3,4), class: 'piece', data: { piece_update_url: games_piece_path(get_id(3,4)), current_x: 3, current_y: 4 } %><% end %></div>
-  <div id="d4" class="black"><% if piece_at(4,4) %><%= image_tag piece_at(4,4), class: 'piece', data: { piece_update_url: games_piece_path(get_id(4,4)), current_x: 4, current_y: 4 } %><% end %></div>
-  <div id="e4" class="white"><% if piece_at(5,4) %><%= image_tag piece_at(5,4), class: 'piece', data: { piece_update_url: games_piece_path(get_id(5,4)), current_x: 5, current_y: 4 } %><% end %></div>
-  <div id="f4" class="black"><% if piece_at(6,4) %><%= image_tag piece_at(6,4), class: 'piece', data: { piece_update_url: games_piece_path(get_id(6,4)), current_x: 6, current_y: 4 } %><% end %></div>
-  <div id="g4" class="white"><% if piece_at(7,4) %><%= image_tag piece_at(7,4), class: 'piece', data: { piece_update_url: games_piece_path(get_id(7,4)), current_x: 7, current_y: 4 } %><% end %></div>
-  <div id="h4" class="black"><% if piece_at(8,4) %><%= image_tag piece_at(8,4), class: 'piece', data: { piece_update_url: games_piece_path(get_id(8,4)), current_x: 8, current_y: 4 } %><% end %></div>
+  <div id="a4" class="white"><% if piece_at(1,4) %><%= image_tag piece_at(1,4), class: 'piece', data: { piece_update_url: games_piece_path(get_id(1,4)), current_x: 1, current_y: 4, piece_id: get_id(1,4) } %><% end %></div>
+  <div id="b4" class="black"><% if piece_at(2,4) %><%= image_tag piece_at(2,4), class: 'piece', data: { piece_update_url: games_piece_path(get_id(2,4)), current_x: 2, current_y: 4, piece_id: get_id(2,4) } %><% end %></div>
+  <div id="c4" class="white"><% if piece_at(3,4) %><%= image_tag piece_at(3,4), class: 'piece', data: { piece_update_url: games_piece_path(get_id(3,4)), current_x: 3, current_y: 4, piece_id: get_id(3,4) } %><% end %></div>
+  <div id="d4" class="black"><% if piece_at(4,4) %><%= image_tag piece_at(4,4), class: 'piece', data: { piece_update_url: games_piece_path(get_id(4,4)), current_x: 4, current_y: 4, piece_id: get_id(4,4) } %><% end %></div>
+  <div id="e4" class="white"><% if piece_at(5,4) %><%= image_tag piece_at(5,4), class: 'piece', data: { piece_update_url: games_piece_path(get_id(5,4)), current_x: 5, current_y: 4, piece_id: get_id(5,4) } %><% end %></div>
+  <div id="f4" class="black"><% if piece_at(6,4) %><%= image_tag piece_at(6,4), class: 'piece', data: { piece_update_url: games_piece_path(get_id(6,4)), current_x: 6, current_y: 4, piece_id: get_id(6,4) } %><% end %></div>
+  <div id="g4" class="white"><% if piece_at(7,4) %><%= image_tag piece_at(7,4), class: 'piece', data: { piece_update_url: games_piece_path(get_id(7,4)), current_x: 7, current_y: 4, piece_id: get_id(7,4) } %><% end %></div>
+  <div id="h4" class="black"><% if piece_at(8,4) %><%= image_tag piece_at(8,4), class: 'piece', data: { piece_update_url: games_piece_path(get_id(8,4)), current_x: 8, current_y: 4, piece_id: get_id(8,4) } %><% end %></div>
   <!-- 6th -->
-  <div id="a3" class="black"><% if piece_at(1,3) %><%= image_tag piece_at(1,3), class: 'piece', data: { piece_update_url: games_piece_path(get_id(1,3)), current_x: 1, current_y: 3 } %><% end %></div>
-  <div id="b3" class="white"><% if piece_at(2,3) %><%= image_tag piece_at(2,3), class: 'piece', data: { piece_update_url: games_piece_path(get_id(2,3)), current_x: 2, current_y: 3 } %><% end %></div>
-  <div id="c3" class="black"><% if piece_at(3,3) %><%= image_tag piece_at(3,3), class: 'piece', data: { piece_update_url: games_piece_path(get_id(3,3)), current_x: 3, current_y: 3 } %><% end %></div>
-  <div id="d3" class="white"><% if piece_at(4,3) %><%= image_tag piece_at(4,3), class: 'piece', data: { piece_update_url: games_piece_path(get_id(4,3)), current_x: 4, current_y: 3 } %><% end %></div>
-  <div id="e3" class="black"><% if piece_at(5,3) %><%= image_tag piece_at(5,3), class: 'piece', data: { piece_update_url: games_piece_path(get_id(5,3)), current_x: 5, current_y: 3 } %><% end %></div>
-  <div id="f3" class="white"><% if piece_at(6,3) %><%= image_tag piece_at(6,3), class: 'piece', data: { piece_update_url: games_piece_path(get_id(6,3)), current_x: 6, current_y: 3 } %><% end %></div>
-  <div id="g3" class="black"><% if piece_at(7,3) %><%= image_tag piece_at(7,3), class: 'piece', data: { piece_update_url: games_piece_path(get_id(7,3)), current_x: 7, current_y: 3 } %><% end %></div>
-  <div id="h3" class="white"><% if piece_at(8,3) %><%= image_tag piece_at(8,3), class: 'piece', data: { piece_update_url: games_piece_path(get_id(8,3)), current_x: 8, current_y: 3 } %><% end %></div>
+  <div id="a3" class="black"><% if piece_at(1,3) %><%= image_tag piece_at(1,3), class: 'piece', data: { piece_update_url: games_piece_path(get_id(1,3)), current_x: 1, current_y: 3, piece_id: get_id(1,3) } %><% end %></div>
+  <div id="b3" class="white"><% if piece_at(2,3) %><%= image_tag piece_at(2,3), class: 'piece', data: { piece_update_url: games_piece_path(get_id(2,3)), current_x: 2, current_y: 3, piece_id: get_id(2,3) } %><% end %></div>
+  <div id="c3" class="black"><% if piece_at(3,3) %><%= image_tag piece_at(3,3), class: 'piece', data: { piece_update_url: games_piece_path(get_id(3,3)), current_x: 3, current_y: 3, piece_id: get_id(3,3) } %><% end %></div>
+  <div id="d3" class="white"><% if piece_at(4,3) %><%= image_tag piece_at(4,3), class: 'piece', data: { piece_update_url: games_piece_path(get_id(4,3)), current_x: 4, current_y: 3, piece_id: get_id(4,3) } %><% end %></div>
+  <div id="e3" class="black"><% if piece_at(5,3) %><%= image_tag piece_at(5,3), class: 'piece', data: { piece_update_url: games_piece_path(get_id(5,3)), current_x: 5, current_y: 3, piece_id: get_id(5,3) } %><% end %></div>
+  <div id="f3" class="white"><% if piece_at(6,3) %><%= image_tag piece_at(6,3), class: 'piece', data: { piece_update_url: games_piece_path(get_id(6,3)), current_x: 6, current_y: 3, piece_id: get_id(6,3) } %><% end %></div>
+  <div id="g3" class="black"><% if piece_at(7,3) %><%= image_tag piece_at(7,3), class: 'piece', data: { piece_update_url: games_piece_path(get_id(7,3)), current_x: 7, current_y: 3, piece_id: get_id(7,3) } %><% end %></div>
+  <div id="h3" class="white"><% if piece_at(8,3) %><%= image_tag piece_at(8,3), class: 'piece', data: { piece_update_url: games_piece_path(get_id(8,3)), current_x: 8, current_y: 3, piece_id: get_id(8,3) } %><% end %></div>
   <!-- 7th -->
-  <div id="a2" class="white"><% if piece_at(1,2) %><%= image_tag piece_at(1,2), class: 'piece', data: { piece_update_url: games_piece_path(get_id(1,2)), current_x: 1, current_y: 2 } %><% end %></div>
-  <div id="b2" class="black"><% if piece_at(2,2) %><%= image_tag piece_at(2,2), class: 'piece', data: { piece_update_url: games_piece_path(get_id(2,2)), current_x: 2, current_y: 2 } %><% end %></div>
-  <div id="c2" class="white"><% if piece_at(3,2) %><%= image_tag piece_at(3,2), class: 'piece', data: { piece_update_url: games_piece_path(get_id(3,2)), current_x: 3, current_y: 2 } %><% end %></div>
-  <div id="d2" class="black"><% if piece_at(4,2) %><%= image_tag piece_at(4,2), class: 'piece', data: { piece_update_url: games_piece_path(get_id(4,2)), current_x: 4, current_y: 2 } %><% end %></div>
-  <div id="e2" class="white"><% if piece_at(5,2) %><%= image_tag piece_at(5,2), class: 'piece', data: { piece_update_url: games_piece_path(get_id(5,2)), current_x: 5, current_y: 2 } %><% end %></div>
-  <div id="f2" class="black"><% if piece_at(6,2) %><%= image_tag piece_at(6,2), class: 'piece', data: { piece_update_url: games_piece_path(get_id(6,2)), current_x: 6, current_y: 2 } %><% end %></div>
-  <div id="g2" class="white"><% if piece_at(7,2) %><%= image_tag piece_at(7,2), class: 'piece', data: { piece_update_url: games_piece_path(get_id(7,2)), current_x: 7, current_y: 2 } %><% end %></div>
-  <div id="h2" class="black"><% if piece_at(8,2) %><%= image_tag piece_at(8,2), class: 'piece', data: { piece_update_url: games_piece_path(get_id(8,2)), current_x: 8, current_y: 2 } %><% end %></div>
+  <div id="a2" class="white"><% if piece_at(1,2) %><%= image_tag piece_at(1,2), class: 'piece', data: { piece_update_url: games_piece_path(get_id(1,2)), current_x: 1, current_y: 2, piece_id: get_id(1,2) } %><% end %></div>
+  <div id="b2" class="black"><% if piece_at(2,2) %><%= image_tag piece_at(2,2), class: 'piece', data: { piece_update_url: games_piece_path(get_id(2,2)), current_x: 2, current_y: 2, piece_id: get_id(2,2) } %><% end %></div>
+  <div id="c2" class="white"><% if piece_at(3,2) %><%= image_tag piece_at(3,2), class: 'piece', data: { piece_update_url: games_piece_path(get_id(3,2)), current_x: 3, current_y: 2, piece_id: get_id(3,2) } %><% end %></div>
+  <div id="d2" class="black"><% if piece_at(4,2) %><%= image_tag piece_at(4,2), class: 'piece', data: { piece_update_url: games_piece_path(get_id(4,2)), current_x: 4, current_y: 2, piece_id: get_id(4,2) } %><% end %></div>
+  <div id="e2" class="white"><% if piece_at(5,2) %><%= image_tag piece_at(5,2), class: 'piece', data: { piece_update_url: games_piece_path(get_id(5,2)), current_x: 5, current_y: 2, piece_id: get_id(5,2) } %><% end %></div>
+  <div id="f2" class="black"><% if piece_at(6,2) %><%= image_tag piece_at(6,2), class: 'piece', data: { piece_update_url: games_piece_path(get_id(6,2)), current_x: 6, current_y: 2, piece_id: get_id(6,2) } %><% end %></div>
+  <div id="g2" class="white"><% if piece_at(7,2) %><%= image_tag piece_at(7,2), class: 'piece', data: { piece_update_url: games_piece_path(get_id(7,2)), current_x: 7, current_y: 2, piece_id: get_id(7,2) } %><% end %></div>
+  <div id="h2" class="black"><% if piece_at(8,2) %><%= image_tag piece_at(8,2), class: 'piece', data: { piece_update_url: games_piece_path(get_id(8,2)), current_x: 8, current_y: 2, piece_id: get_id(8,2) } %><% end %></div>
   <!-- 8th -->
-  <div id="a1" class="black"><% if piece_at(1,1) %><%= image_tag piece_at(1,1), class: 'piece', data: { piece_update_url: games_piece_path(get_id(1,1)), current_x: 1, current_y: 1 } %><% end %></div>
-  <div id="b1" class="white"><% if piece_at(2,1) %><%= image_tag piece_at(2,1), class: 'piece', data: { piece_update_url: games_piece_path(get_id(2,1)), current_x: 2, current_y: 1 } %><% end %></div>
-  <div id="c1" class="black"><% if piece_at(3,1) %><%= image_tag piece_at(3,1), class: 'piece', data: { piece_update_url: games_piece_path(get_id(3,1)), current_x: 3, current_y: 1 } %><% end %></div>
-  <div id="d1" class="white"><% if piece_at(4,1) %><%= image_tag piece_at(4,1), class: 'piece', data: { piece_update_url: games_piece_path(get_id(4,1)), current_x: 4, current_y: 1 } %><% end %></div>
-  <div id="e1" class="black"><% if piece_at(5,1) %><%= image_tag piece_at(5,1), class: 'piece', data: { piece_update_url: games_piece_path(get_id(5,1)), current_x: 5, current_y: 1 } %><% end %></div>
-  <div id="f1" class="white"><% if piece_at(6,1) %><%= image_tag piece_at(6,1), class: 'piece', data: { piece_update_url: games_piece_path(get_id(6,1)), current_x: 6, current_y: 1 } %><% end %></div>
-  <div id="g1" class="black"><% if piece_at(7,1) %><%= image_tag piece_at(7,1), class: 'piece', data: { piece_update_url: games_piece_path(get_id(7,1)), current_x: 7, current_y: 1 } %><% end %></div>
-  <div id="h1" class="white"><% if piece_at(8,1) %><%= image_tag piece_at(8,1), class: 'piece', data: { piece_update_url: games_piece_path(get_id(8,1)), current_x: 8, current_y: 1 } %><% end %></div>
+  <div id="a1" class="black"><% if piece_at(1,1) %><%= image_tag piece_at(1,1), class: 'piece', data: { piece_update_url: games_piece_path(get_id(1,1)), current_x: 1, current_y: 1, piece_id: get_id(1,1) } %><% end %></div>
+  <div id="b1" class="white"><% if piece_at(2,1) %><%= image_tag piece_at(2,1), class: 'piece', data: { piece_update_url: games_piece_path(get_id(2,1)), current_x: 2, current_y: 1, piece_id: get_id(2,1) } %><% end %></div>
+  <div id="c1" class="black"><% if piece_at(3,1) %><%= image_tag piece_at(3,1), class: 'piece', data: { piece_update_url: games_piece_path(get_id(3,1)), current_x: 3, current_y: 1, piece_id: get_id(3,1) } %><% end %></div>
+  <div id="d1" class="white"><% if piece_at(4,1) %><%= image_tag piece_at(4,1), class: 'piece', data: { piece_update_url: games_piece_path(get_id(4,1)), current_x: 4, current_y: 1, piece_id: get_id(4,1) } %><% end %></div>
+  <div id="e1" class="black"><% if piece_at(5,1) %><%= image_tag piece_at(5,1), class: 'piece', data: { piece_update_url: games_piece_path(get_id(5,1)), current_x: 5, current_y: 1, piece_id: get_id(5,1) } %><% end %></div>
+  <div id="f1" class="white"><% if piece_at(6,1) %><%= image_tag piece_at(6,1), class: 'piece', data: { piece_update_url: games_piece_path(get_id(6,1)), current_x: 6, current_y: 1, piece_id: get_id(6,1) } %><% end %></div>
+  <div id="g1" class="black"><% if piece_at(7,1) %><%= image_tag piece_at(7,1), class: 'piece', data: { piece_update_url: games_piece_path(get_id(7,1)), current_x: 7, current_y: 1, piece_id: get_id(7,1) } %><% end %></div>
+  <div id="h1" class="white"><% if piece_at(8,1) %><%= image_tag piece_at(8,1), class: 'piece', data: { piece_update_url: games_piece_path(get_id(8,1)), current_x: 8, current_y: 1, piece_id: get_id(8,1) } %><% end %></div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="proModal" tabindex="-1" role="dialog" aria-labelledby="proModalLabel" aria-hidden="true" data-piece-id="-1" data-update-url="abc" data-piece-color="color" >
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="proModalLabel">Pawn Promotion</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+<!-- Placeholder -->
+        <div class="modal-body">
+          <!-- Placeholder -->
+          <p>What will this pawn be promoted to?</p>
+          <table style="width:100%">
+            <tr>
+              <td><%= image_tag( "/assets/images/pieces/whitequeen.svg", id: "queenPromotion" ) %></td>
+              <td><%= image_tag( "/assets/images/pieces/whiteknight.svg", id: "knightPromotion" ) %></td>
+            </tr>
+            <tr>
+              <td><%= image_tag( "/assets/images/pieces/whiterook.svg", id: "rookPromotion" ) %></td>
+              <td><%= image_tag( "/assets/images/pieces/whitebishop.svg", id: "bishopPromotion" ) %></td>
+            </tr>
+          </table>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <!-- Placeholder -->
+        </div>
+<!-- Placeholder -->
+    </div>
+  </div>
 </div>
 
 <%= @game.black_player_id %>
