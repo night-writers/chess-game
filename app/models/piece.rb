@@ -101,10 +101,10 @@ class Piece < ApplicationRecord
     update_piece_location!(new_x, new_y)
   end
   
-  def en_passant(location_x, location_y, destination_x, destination_y, game)
-    if (game.user_id == game.white_player_id) && (is_occupied?(destination_x, destination_y - 1, game)) == true
+  def en_passant(location_x, location_y, destination_x, destination_y, game, color)
+    if (color == "white") && (is_occupied?(destination_x, destination_y - 1, game)) == true
       piececheck = game.pieces.find_by(location_x: destination_x, location_y: destination_y - 1)
-    elsif (game.user_id == game.black_player_id) && (is_occupied?(destination_x, destination_y + 1, game)) == true
+    elsif (color == "black") && (is_occupied?(destination_x, destination_y + 1, game)) == true
       piececheck = game.pieces.find_by(location_x: destination_x, location_y: destination_y + 1)
     else
       return false
@@ -114,5 +114,20 @@ class Piece < ApplicationRecord
       else
         return false
       end
+  end
+  
+  def en_passant_capture(location_x, location_y, destination_x, destination_y, game, color)
+    if en_passant(location_x, location_y, destination_x, destination_y, game, color) == true
+      piece_at_destination = game.pieces.find_by(location_x: destination_x, location_y: destination_y - 1)
+      piece_at_destination2 = game.pieces.find_by(location_x: destination_x, location_y: destination_y + 1)
+      if color == "white"
+        raise 'Invalid move, try again.' unless piece_at_destination.color != self.color
+        piece_at_destination.capture_piece!
+      elsif color == "black"
+        raise 'Invalid move, try again.' unless piece_at_destination2.color != self.color
+        piece_at_destination2.capture_piece!
+      end
+    end  
+    update_piece_location!(destination_x, destination_y)   
   end
 end

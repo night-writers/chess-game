@@ -9,7 +9,7 @@ class Games::PiecesController < ApplicationController
     return render_not_found if @piece.blank?
     @piece.update_attributes(piece_params)
     # call the move_to logic
-    if @piece.valid_move?(@piece.location_x, @piece.location_y, @piece.new_x, @piece.new_y, @piece.game)
+    if @piece.valid_move?(@piece.location_x, @piece.location_y, @piece.new_x, @piece.new_y, @piece.game, @piece.color)
       # if @piece.game.check?
       #   flash[:notice] = "Check!"
       # end

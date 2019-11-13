@@ -3,7 +3,7 @@ $(function() {
     $('.piece').draggable();
 });
 </script>
-<% if @game.turn == current_user.id %>
+
 <script>
   $(function() {
     function convertLocation(x) {
@@ -69,14 +69,7 @@ $(function() {
 });
 
 </script>
-<% if @game.turn == @game.white_player_id %>
-  <% if @game.black_player_id %>
-    <% @game.update_attributes({turn: @game.black_player_id}) %>
-  <% end %>
-<% elsif @game.turn == @game.black_player_id %>
-  <% @game.update_attributes({turn: @game.white_player_id}) %>
-<% end %>
-<% end %>
+
 
 <div class="chessboard">
   <!-- 1st -->

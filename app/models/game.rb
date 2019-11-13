@@ -39,7 +39,8 @@ class Game < ApplicationRecord
         name: "whitepawn#{x}",
         image: "/assets/images/pieces/whitepawn.svg",
         status: "uncaptured",
-        move_count: 0
+        move_count: 0,
+        color: "white"
       )
     end
 
@@ -53,7 +54,8 @@ class Game < ApplicationRecord
         name: "whiterook1",
         image: "/assets/images/pieces/whiterook.svg",
         status: "uncaptured",
-        move_count: 0
+        move_count: 0,
+        color: "white"
       )
       Piece.create(
         type: Rook,
@@ -64,7 +66,8 @@ class Game < ApplicationRecord
         name: "whiterook2",
         image: "/assets/images/pieces/whiterook.svg",
         status: "uncaptured",
-        move_count: 0
+        move_count: 0,
+        color: "white"
       )
 
     # knights
@@ -77,7 +80,8 @@ class Game < ApplicationRecord
         name: "whiteknight1",
         image: "/assets/images/pieces/whiteknight.svg",
         status: "uncaptured",
-        move_count: 0
+        move_count: 0,
+        color: "white"
       )
       Piece.create(
         type: Knight,
@@ -88,7 +92,8 @@ class Game < ApplicationRecord
         name: "whiteknight2",
         image: "/assets/images/pieces/whiteknight.svg",
         status: "uncaptured",
-        move_count: 0
+        move_count: 0,
+        color: "white"
       )
 
     # bishops
@@ -101,7 +106,8 @@ class Game < ApplicationRecord
         name: "whitebishop1",
         image: "/assets/images/pieces/whitebishop.svg",
         status: "uncaptured",
-        move_count: 0
+        move_count: 0,
+        color: "white"
       )
       Piece.create(
         type: Bishop,
@@ -112,7 +118,8 @@ class Game < ApplicationRecord
         name: "whitebishop2",
         image: "/assets/images/pieces/whitebishop.svg",
         status: "uncaptured",
-        move_count: 0
+        move_count: 0,
+        color: "white"
       )
 
     # king
@@ -125,7 +132,8 @@ class Game < ApplicationRecord
         name: "whiteking",
         image: "/assets/images/pieces/whiteking.svg",
         status: "uncaptured",
-        move_count: 0
+        move_count: 0,
+        color: "white"
       )
 
     # queen
@@ -138,7 +146,8 @@ class Game < ApplicationRecord
         name: "whitequeen",
         image: "/assets/images/pieces/whitequeen.svg",
         status: "uncaptured",
-        move_count: 0
+        move_count: 0,
+        color: "white"
       )
 
   # black pieces
@@ -152,7 +161,8 @@ class Game < ApplicationRecord
           name: "blackpawn#{x}",
           image: "/assets/images/pieces/blackpawn.svg",
           status: "uncaptured",
-          move_count: 0
+          move_count: 0,
+          color: "black"
         )
       end
 
@@ -165,7 +175,8 @@ class Game < ApplicationRecord
         name: "blackrook1",
         image: "/assets/images/pieces/blackrook.svg",
         status: "uncaptured",
-        move_count: 0
+        move_count: 0,
+        color: "black"
       )
       Piece.create(
         type: Rook,
@@ -175,7 +186,8 @@ class Game < ApplicationRecord
         name: "blackrook2",
         image: "/assets/images/pieces/blackrook.svg",
         status: "uncaptured",
-        move_count: 0
+        move_count: 0,
+        color: "black"
       )
 
     # knights
@@ -187,7 +199,8 @@ class Game < ApplicationRecord
         name: "blackknight1",
         image: "/assets/images/pieces/blackknight.svg",
         status: "uncaptured",
-        move_count: 0
+        move_count: 0,
+        color: "black"
       )
       Piece.create(
         type: Knight,
@@ -197,7 +210,8 @@ class Game < ApplicationRecord
         name: "blackknight2",
         image: "/assets/images/pieces/blackknight.svg",
         status: "uncaptured",
-        move_count: 0
+        move_count: 0,
+        color: "black"
       )
 
     # bishops
@@ -209,7 +223,8 @@ class Game < ApplicationRecord
         name: "blackbishop1",
         image: "/assets/images/pieces/blackbishop.svg",
         status: "uncaptured",
-        move_count: 0
+        move_count: 0,
+        color: "black"
       )
       Piece.create(
         type: Bishop,
@@ -219,7 +234,8 @@ class Game < ApplicationRecord
         name: "blackbishop2",
         image: "/assets/images/pieces/blackbishop.svg",
         status: "uncaptured",
-        move_count: 0
+        move_count: 0,
+        color: "black"
       )
 
     # king
@@ -231,7 +247,8 @@ class Game < ApplicationRecord
         name: "blackking",
         image: "/assets/images/pieces/blackking.svg",
         status: "uncaptured",
-        move_count: 0
+        move_count: 0,
+        color: "black"
       )
 
     # queen
@@ -243,7 +260,8 @@ class Game < ApplicationRecord
         name: "blackqueen",
         image: "/assets/images/pieces/blackqueen.svg",
         status: "uncaptured",
-        move_count: 0
+        move_count: 0,
+        color: "black"
       )
   end
 end
