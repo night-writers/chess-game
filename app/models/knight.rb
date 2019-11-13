@@ -1,5 +1,5 @@
 class Knight < Piece
-  def valid_move?(location_x, location_y, destination_x, destination_y, game)
+  def valid_move?(location_x, location_y, destination_x, destination_y, game, color)
     # If lateral movement is one space, allow two-space movement along y-axis
     # If lateral movement is two spaces, allow single-space movement along y-axis
     if ((destination_x - location_x) == 1) || ((location_x - destination_x) == 1)
