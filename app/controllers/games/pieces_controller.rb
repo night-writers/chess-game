@@ -10,9 +10,9 @@ class Games::PiecesController < ApplicationController
     @piece.update_attributes(piece_params)
     # call the move_to logic
     if @piece.valid_move?(@piece.location_x, @piece.location_y, @piece.new_x, @piece.new_y, @piece.game)
-      # if @piece.game.check?
-      #   flash[:notice] = "Check!"
-      # end
+      if @piece.game.check?(Game.find(@piece.game_id))
+        flash[:notice] = "Check!"
+      end
       @piece.move_to!(@piece.new_x, @piece.new_y)
     
       # redirect_to game_path(@piece.game)

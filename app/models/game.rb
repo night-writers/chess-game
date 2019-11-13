@@ -11,11 +11,13 @@ class Game < ApplicationRecord
     self.turn ||= self.user_id
   end
 
-  def check?
+  def check?(game)
+    # byebug
+    self.pieces = game.pieces
     black_king = pieces.where(name: "blackking")
     white_king = pieces.where(name: "whiteking")
-
-    pieces.each do |piece|
+    # byebug
+    self.pieces.each do |piece|
       if piece.valid_move?(piece.location_x, piece.location_y, black_king.location_x, black_king.location_y) && (piece.player_id != piece.game.black_player_id)
         return true
       end
