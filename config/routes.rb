@@ -5,4 +5,5 @@
   namespace :games do
     resources :pieces, only: [:show, :update]
   end
+  resources :users, only: :show
 end
