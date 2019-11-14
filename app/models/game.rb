@@ -11,17 +11,17 @@ class Game < ApplicationRecord
     self.turn ||= self.user_id
   end
 
-  def check?(game)
+  def check?
     # byebug
-    self.pieces = game.pieces
-    black_king = pieces.where(name: "blackking")
-    white_king = pieces.where(name: "whiteking")
+    black_king = self.pieces.where(name: "blackking").first
+    white_king = self.pieces.where(name: "whiteking").first
     # byebug
     self.pieces.each do |piece|
-      if piece.valid_move?(piece.location_x, piece.location_y, black_king.location_x, black_king.location_y) && (piece.player_id != piece.game.black_player_id)
+      # byebug
+      if piece.valid_move?(piece.location_x, piece.location_y, black_king.location_x, black_king.location_y, self) && (piece.player_id != piece.game.black_player_id)
         return true
       end
-      if piece.valid_move?(piece.location_x, piece.location_y, white_king.location_x, white_king.location_y) && (piece.player_id != piece.game.white_player_id)
+      if piece.valid_move?(piece.location_x, piece.location_y, white_king.location_x, white_king.location_y, self) && (piece.player_id != piece.game.white_player_id)
         return true
       end
     end
