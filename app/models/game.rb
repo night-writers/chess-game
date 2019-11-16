@@ -5,6 +5,14 @@ class Game < ApplicationRecord
   belongs_to :user, optional: true
   scope :available, -> { where(status: "available") }
   
+  def self.players?
+    if self.black_player_id != nil && self.white_player_id
+      return 2
+    else
+      return false
+    end
+  end
+  
   def init
     self.status ||= "available"
     self.white_player_id ||= self.user_id

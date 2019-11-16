@@ -3,73 +3,80 @@ $(function() {
     $('.piece').draggable();
 });
 </script>
-
-<script>
-  $(function() {
-    function convertLocation(x) {
-      var new_x = "";
-      switch(x) {
-        case "a":
-          new_x = 1;
-          break;
-        case "b":
-          new_x = 2;
-          break;
-        case "c":
-          new_x = 3;
-          break;
-        case "d":
-          new_x = 4;
-          break;
-        case "e":
-          new_x = 5;
-          break;
-        case "f":
-          new_x = 6;
-          break;
-        case "g":
-          new_x = 7;
-          break;
-        case "h":
-          new_x = 8;
-          break;
-      }
-      return new_x;
-    }
-    $('.white').droppable({
-      drop: function( event, ui ) {
-        var updateURL = $(ui.draggable).attr("data-piece-update-url");
-        /*var current_x = $(ui.draggable).attr("data-current-x");
-        var current_y = $(ui.draggable).attr("data-current-y");*/
-        var myID = this.getAttribute("id");
-        var new_x = convertLocation(myID.substring(0,1));
-        var new_y = myID.substring(1,2);
-        $.ajax({
-          type: 'PUT',
-          url: updateURL,
-          dataType: 'json',
-          data: { piece: { new_x: new_x, new_y: new_y/*, destination_x: new_x, destination_y: new_y*/ }}
+<% if @game.turn == current_user.id %>
+    <script>
+      $(function() {
+        function convertLocation(x) {
+          var new_x = "";
+          switch(x) {
+            case "a":
+              new_x = 1;
+              break;
+            case "b":
+              new_x = 2;
+              break;
+            case "c":
+              new_x = 3;
+              break;
+            case "d":
+              new_x = 4;
+              break;
+            case "e":
+              new_x = 5;
+              break;
+            case "f":
+              new_x = 6;
+              break;
+            case "g":
+              new_x = 7;
+              break;
+            case "h":
+              new_x = 8;
+              break;
+          }
+          return new_x;
+        }
+        $('.white').droppable({
+          drop: function( event, ui ) {
+            var updateURL = $(ui.draggable).attr("data-piece-update-url");
+            /*var current_x = $(ui.draggable).attr("data-current-x");
+            var current_y = $(ui.draggable).attr("data-current-y");*/
+            var myID = this.getAttribute("id");
+            var new_x = convertLocation(myID.substring(0,1));
+            var new_y = myID.substring(1,2);
+            $.ajax({
+              type: 'PUT',
+              url: updateURL,
+              dataType: 'json',
+              data: { piece: { new_x: new_x, new_y: new_y/*, destination_x: new_x, destination_y: new_y*/ }}
+            });
+          }
         });
-      }
-    });
-    $('.black').droppable({
-      drop: function( event, ui ) {
-        var updateURL = $(ui.draggable).attr("data-piece-update-url");
-        var myID = this.getAttribute("id");
-        var new_x = convertLocation(myID.substring(0,1));
-        var new_y = myID.substring(1,2);
-        $.ajax({
-          type: 'PUT',
-          url: updateURL,
-          dataType: 'json',
-          data: { piece: { new_x: new_x, new_y: new_y }}
+        $('.black').droppable({
+          drop: function( event, ui ) {
+            var updateURL = $(ui.draggable).attr("data-piece-update-url");
+            var myID = this.getAttribute("id");
+            var new_x = convertLocation(myID.substring(0,1));
+            var new_y = myID.substring(1,2);
+            $.ajax({
+              type: 'PUT',
+              url: updateURL,
+              dataType: 'json',
+              data: { piece: { new_x: new_x, new_y: new_y }}
+            });
+          }
         });
-      }
     });
-});
-
-</script>
-
+    
+    </script>
+    <% if @game.turn == @game.white_player_id %>
+        <% if @game.black_player_id %>
+            <% @game.update_attributes({turn: @game.black_player_id}) %>
+        <% end %>
+    <% elsif @game.turn == @game.black_player_id %>
+        <% @game.update_attributes({turn: @game.white_player_id}) %>
+    <% end %>
+<% end %>
 
 <div class="chessboard">
   <!-- 1st -->
