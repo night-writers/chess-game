@@ -1,77 +1,4 @@
-<script>
-$(function() {
-    $('.piece').draggable();
-});
-</script>
-
-<script>
-  $(function() {
-    function convertLocation(x) {
-      var new_x = "";
-      switch(x) {
-        case "a":
-          new_x = 1;
-          break;
-        case "b":
-          new_x = 2;
-          break;
-        case "c":
-          new_x = 3;
-          break;
-        case "d":
-          new_x = 4;
-          break;
-        case "e":
-          new_x = 5;
-          break;
-        case "f":
-          new_x = 6;
-          break;
-        case "g":
-          new_x = 7;
-          break;
-        case "h":
-          new_x = 8;
-          break;
-      }
-      return new_x;
-    }
-    $('.white').droppable({
-      drop: function( event, ui ) {
-        var updateURL = $(ui.draggable).attr("data-piece-update-url");
-        /*var current_x = $(ui.draggable).attr("data-current-x");
-        var current_y = $(ui.draggable).attr("data-current-y");*/
-        var myID = this.getAttribute("id");
-        var new_x = convertLocation(myID.substring(0,1));
-        var new_y = myID.substring(1,2);
-        $.ajax({
-          type: 'PUT',
-          url: updateURL,
-          dataType: 'json',
-          data: { piece: { new_x: new_x, new_y: new_y/*, destination_x: new_x, destination_y: new_y*/ }}
-        });
-      }
-    });
-    $('.black').droppable({
-      drop: function( event, ui ) {
-        var updateURL = $(ui.draggable).attr("data-piece-update-url");
-        var myID = this.getAttribute("id");
-        var new_x = convertLocation(myID.substring(0,1));
-        var new_y = myID.substring(1,2);
-        $.ajax({
-          type: 'PUT',
-          url: updateURL,
-          dataType: 'json',
-          data: { piece: { new_x: new_x, new_y: new_y }}
-        });
-      }
-    });
-});
-
-</script>
-
-
-<div class="chessboard">
+<div id="board" class="chessboard">
   <!-- 1st -->
   <div id="a8" class="white"><% if piece_at(1,8) %><%= image_tag piece_at(1,8), class: 'piece', data: { piece_update_url: games_piece_path(get_id(1,8)), current_x: 1, current_y: 8 } %><% end %></div>
   <div id="b8" class="black"><% if piece_at(2,8) %><%= image_tag piece_at(2,8), class: 'piece', data: { piece_update_url: games_piece_path(get_id(2,8)), current_x: 2, current_y: 8 } %><% end %></div>
@@ -145,6 +72,111 @@ $(function() {
   <div id="g1" class="black"><% if piece_at(7,1) %><%= image_tag piece_at(7,1), class: 'piece', data: { piece_update_url: games_piece_path(get_id(7,1)), current_x: 7, current_y: 1 } %><% end %></div>
   <div id="h1" class="white"><% if piece_at(8,1) %><%= image_tag piece_at(8,1), class: 'piece', data: { piece_update_url: games_piece_path(get_id(8,1)), current_x: 8, current_y: 1 } %><% end %></div>
 </div>
+
+<% if @game.turn == current_user.id %>
+<script>
+  $(function() {
+    $('.piece').draggable();
+    function convertLocation(x) {
+      var new_x = "";
+      switch(x) {
+        case "a":
+          new_x = 1;
+          break;
+        case "b":
+          new_x = 2;
+          break;
+        case "c":
+          new_x = 3;
+          break;
+        case "d":
+          new_x = 4;
+          break;
+        case "e":
+          new_x = 5;
+          break;
+        case "f":
+          new_x = 6;
+          break;
+        case "g":
+          new_x = 7;
+          break;
+        case "h":
+          new_x = 8;
+          break;
+      }
+      return new_x;
+    }
+    $('.white').droppable({
+      drop: function( event, ui ) {
+        var updateURL = $(ui.draggable).attr("data-piece-update-url");
+        var myID = this.getAttribute("id");
+        var new_x = convertLocation(myID.substring(0,1));
+        var new_y = myID.substring(1,2);
+        var that = $(this);
+        $.ajax({
+          type: 'PUT',
+          url: updateURL,
+          dataType: 'json',
+          data: { piece: { new_x: new_x, new_y: new_y }},
+          error: function(e) {
+            ui.draggable.animate( {left: 0, top: 0}, 500 );
+          },
+          success: function() {
+            var drop_p = that.offset();
+            var drag_p = ui.draggable.offset();
+            var left_end = drop_p.left - drag_p.left;
+            var top_end = drop_p.top - drag_p.top;
+            ui.draggable.animate({
+                top: '+=' + top_end,
+                left: '+=' + left_end
+            });
+          }
+        });
+      }
+    });
+    $('.black').droppable({
+      drop: function( event, ui ) {
+        var updateURL = $(ui.draggable).attr("data-piece-update-url");
+        var myID = this.getAttribute("id");
+        var new_x = convertLocation(myID.substring(0,1));
+        var new_y = myID.substring(1,2);
+        var that = $(this);
+        $.ajax({
+          type: 'PUT',
+          url: updateURL,
+          dataType: 'json',
+          data: { piece: { new_x: new_x, new_y: new_y }},
+          error: function(e) {
+            ui.draggable.animate( {left: 0, top: 0}, 500 );
+          },
+          success: function() {
+            var drop_p = that.offset();
+            var drag_p = ui.draggable.offset();
+            var left_end = drop_p.left - drag_p.left;
+            var top_end = drop_p.top - drag_p.top;
+            ui.draggable.animate({
+                top: '+=' + top_end,
+                left: '+=' + left_end
+            });
+          }
+        });
+      }
+    });
+  });
+
+</script>
+
+<% if @game.turn == @game.white_player_id %>
+  <% if @game.black_player_id %>
+    <% @game.update_attributes({turn: @game.black_player_id}) %>
+  <% end %>
+<% elsif @game.turn == @game.black_player_id %>
+  <% @game.update_attributes({turn: @game.white_player_id}) %>
+<% end %>
+<% end %>
+
+
 
 <%= @game.black_player_id %>
 <%= @game.white_player_id %>
