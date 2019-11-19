@@ -16,6 +16,8 @@ class Games::PiecesController < ApplicationController
       @piece.move_to!(@piece.new_x, @piece.new_y)
     
       # redirect_to game_path(@piece.game)
+    else
+      render json: { message: 'error' }, status: 400
     end
     # render plain: 'updated!'
   end

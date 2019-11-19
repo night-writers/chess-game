@@ -110,18 +110,27 @@
     $('.white').droppable({
       drop: function( event, ui ) {
         var updateURL = $(ui.draggable).attr("data-piece-update-url");
-        /*var current_x = $(ui.draggable).attr("data-current-x");
-        var current_y = $(ui.draggable).attr("data-current-y");*/
         var myID = this.getAttribute("id");
         var new_x = convertLocation(myID.substring(0,1));
         var new_y = myID.substring(1,2);
+        var that = $(this);
         $.ajax({
           type: 'PUT',
           url: updateURL,
           dataType: 'json',
-          data: { piece: { new_x: new_x, new_y: new_y/*, destination_x: new_x, destination_y: new_y*/ }},
+          data: { piece: { new_x: new_x, new_y: new_y }},
+          error: function(e) {
+            ui.draggable.animate( {left: 0, top: 0}, 500 );
+          },
           success: function() {
-            $('#board').load(' #board > *');
+            var drop_p = that.offset();
+            var drag_p = ui.draggable.offset();
+            var left_end = drop_p.left - drag_p.left;
+            var top_end = drop_p.top - drag_p.top;
+            ui.draggable.animate({
+                top: '+=' + top_end,
+                left: '+=' + left_end
+            });
           }
         });
       }
@@ -132,13 +141,24 @@
         var myID = this.getAttribute("id");
         var new_x = convertLocation(myID.substring(0,1));
         var new_y = myID.substring(1,2);
+        var that = $(this);
         $.ajax({
           type: 'PUT',
           url: updateURL,
           dataType: 'json',
           data: { piece: { new_x: new_x, new_y: new_y }},
+          error: function(e) {
+            ui.draggable.animate( {left: 0, top: 0}, 500 );
+          },
           success: function() {
-            $('#board').load(' #board > *');
+            var drop_p = that.offset();
+            var drag_p = ui.draggable.offset();
+            var left_end = drop_p.left - drag_p.left;
+            var top_end = drop_p.top - drag_p.top;
+            ui.draggable.animate({
+                top: '+=' + top_end,
+                left: '+=' + left_end
+            });
           }
         });
       }
