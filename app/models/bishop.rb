@@ -1,5 +1,5 @@
 class Bishop < Piece
-  def valid_move?(location_x, location_y, destination_x, destination_y, game)
+  def valid_move?(location_x, location_y, destination_x, destination_y, game, color)
     # position movement is allowed condition (moving only in diagonal directions)
     if (location_x != destination_x) && (location_y != destination_y)
       # if the piece moved in only diagonal directions, check if the piece is obstructed

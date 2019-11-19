@@ -1,15 +1,15 @@
 class Pawn < Piece
-  def valid_move?(location_x, location_y, destination_x, destination_y, game)
+  def valid_move?(location_x, location_y, destination_x, destination_y, game, color)
   # Check to see if the piece is obstructed.
     if is_obstructed?(location_x, location_y, destination_x, destination_y, game)
       return false
     end
   # Check to make sure a piece is not moving backwards.
-    if (game.user_id == game.white_player_id)
+    if (color == "white")
       if (destination_y < location_y)
         return false
       end
-    elsif (game.user_id == game.black_player_id)
+    elsif (color == "black")
       if (destination_y > location_y)
         return false
       end
@@ -19,7 +19,7 @@ class Pawn < Piece
       return false
     end
   # Check to see if it is possible to perform an en passant capture.
-    if en_passant(location_x, location_y, destination_x, destination_y, game) == true
+    if en_passant(location_x, location_y, destination_x, destination_y, game, color) == true
       if (location_x - destination_x) <= 1 && (location_y - destination_y) <= 1 && (destination_x - location_x) <= 1 && (destination_y - location_y) <= 1
         return true
       else
@@ -31,9 +31,9 @@ class Pawn < Piece
       return false
     end
   # Allow the pawn to move two spaces if it's in the starting position, otherwise only allow the pawn to move one space.
-    if (game.user_id == game.white_player_id) && (location_y == 2) && (location_x - destination_x) <= 2 && (location_y - destination_y) <= 2 && (destination_x - location_x) <= 2 && (destination_y - location_y) <= 2
+    if (color == "white") && (location_y == 2) && (location_x - destination_x) <= 2 && (location_y - destination_y) <= 2 && (destination_x - location_x) <= 2 && (destination_y - location_y) <= 2
       return true
-    elsif (game.user_id == game.black_player_id) && (location_y == 7) && (location_x - destination_x) <= 2 && (location_y - destination_y) <= 2 && (destination_x - location_x) <= 2 && (destination_y - location_y) <= 2
+    elsif (color == "black") && (location_y == 7) && (location_x - destination_x) <= 2 && (location_y - destination_y) <= 2 && (destination_x - location_x) <= 2 && (destination_y - location_y) <= 2
       return true
     elsif (location_x - destination_x) <= 1 && (location_y - destination_y) <= 1 && (destination_x - location_x) <= 1 && (destination_y - location_y) <= 1 
       return true
