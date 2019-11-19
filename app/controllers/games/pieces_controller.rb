@@ -23,6 +23,6 @@ class Games::PiecesController < ApplicationController
   private
   
   def piece_params
-    params.require(:piece).permit(:new_x, :new_y)
+    params.require(:piece).permit(:new_x, :new_y, :type, :image, :name)
   end
 end
