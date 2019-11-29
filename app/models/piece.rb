@@ -94,7 +94,7 @@ class Piece < ApplicationRecord
 
     if is_occupied?(new_x, new_y, game)
       piece_at_destination = game.pieces.find_by(location_x: new_x, location_y: new_y)
-      raise 'Invalid move, try again.' unless piece_at_destination.user != self.user
+      raise 'Invalid move, try again.' unless piece_at_destination.color != self.color
 
       piece_at_destination.capture_piece!
     end  
