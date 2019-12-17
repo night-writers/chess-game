@@ -1,24 +1,7 @@
-# README
+<h1> Night Writers Online Chess </h1>
+<h2> A Multiplayer Chess Application Created by an Agile Development Team </h2>
+Night-Writer's Online Chess is a a collaborative project created by an Agile software development team. Under the guidance of a senior software engineer, we had weekly Agile team meetings for code reviews, sprint planning, and feature assignments. 
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+<img src="https://github.com/matthewchoat/personal-blog/blob/master/chessgame.png" />
 
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+View the Heroku deploy for this application and start playing chess here: https://chess-night-writers.herokuapp.com/
